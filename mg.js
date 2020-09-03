@@ -1,52 +1,60 @@
-var p = document.querySelector('#p');
+var hw = document.querySelector('#hw');
+var fr = document.querySelector('#fr');
+var s = document.querySelector('#s');
+var lc = document.querySelector('#lc');
+var c = document.querySelector('#c');
+
 
 var canvas = document.querySelector('#canvas');
 var ctx = canvas.getContext('2d');
-canvas.width = 400;
-canvas.height = 400;
+canvas.width = parseInt(hw.value);
+canvas.height = parseInt(hw.value);
 
 let line = new Lines();
-let wi = 40;
-let rows = canvas.height/wi;
-let cols = canvas.width/wi;
+let wi = parseInt(s.value);
+let rows = Math.floor(canvas.height/wi);
+let cols = Math.floor(canvas.width/wi);
 let neighbour = new Array();
 let grid = new Array();
+var inter;
 
 class Cells {
-	constructor(i, j) {
+	constructor(i, j, color, fcolor) {
 		this.w = wi;//can be skipped
 		this.i = i;
 		this.j = j;
 		this.walls = [true,true,true,true];
 		this.visited = false;
+		this.c = color;
+		this.fc = fcolor;
 	}
 	static index(i, j) {
 		if (i < 0 || j < 0 || i > cols-1 || j > rows-1) {
 			return -1;
 		}else {
-			return j + i * rows;
+			return Math.floor(j + i * rows);
 		}
 	}
 	draw() {
-		let x = this.i*this.w;
-		let y = this.j*this.w;
+		let x = Math.floor(this.i*this.w);
+		let y = Math.floor(this.j*this.w);
 
-		if (this.walls[0]) line.draw(x, y, x+this.w, y);
-		if (this.walls[1]) line.draw(x+this.w, y, x+this.w, y+this.w);
-		if (this.walls[2]) line.draw(x+this.w, y+this.w, x, y+this.w);
-		if (this.walls[3]) line.draw(x, y+this.w, x, y);
+		if (this.walls[0]) line.draw(x, y, x+this.w, y, this.c);
+		if (this.walls[1]) line.draw(x+this.w, y, x+this.w, y+this.w, this.c);
+		if (this.walls[2]) line.draw(x+this.w, y+this.w, x, y+this.w, this.c);
+		if (this.walls[3]) line.draw(x, y+this.w, x, y, this.c);
 
 		
 	}
 	drawVisit() {
-		let x = this.i*this.w;
-		let y = this.j*this.w;
+		let x = Math.floor(this.i*this.w);
+		let y = Math.floor(this.j*this.w);
 
 		
 		if (this.visited) {
 			
 			ctx.beginPath();
-			ctx.fillStyle = 'rgb(100, 9, 100)';
+			ctx.fillStyle = this.fc;
 			ctx.fillRect(x, y, this.w, this.w);
 			//ctx.strokeRect(x, y, this.w, this.w);
 			ctx.closePath();
@@ -107,18 +115,27 @@ class Cells {
 	}
 }
 //create grid
-(()=>{
+function create() {
+	canvas.width = parseInt(hw.value);
+	canvas.height = parseInt(hw.value);
+	wi = parseInt(s.value);
+	rows = Math.floor(canvas.height/wi);
+	cols = Math.floor(canvas.width/wi);
+	neighbour = new Array();
+	grid = new Array();
+
+	inter;
+
 	for (var i = 0; i < rows; i++) {
 		for (var j = 0; j < cols; j++) {
-			grid.push(new Cells(i, j));
+			grid.push(new Cells(i, j, lc.value, c.value));
 		}
 	}
-})();
-
-//step-1
-var current;
-grid[0].visited = true;
-myStack.push(grid[0]);
+	//step-1
+	var current;
+	grid[0].visited = true;
+	myStack.push(grid[0]);
+}
 
 function animation() {
 	ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -149,4 +166,13 @@ function animation() {
 	//clearInterval(inter)
 	//requestAnimationFrame(animation);
 }
-let inter = setInterval(animation, 60);
+
+function generationStart() {
+	
+	clearInterval(inter);
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	grid = new Array();
+	create();
+	inter = setInterval(animation, parseInt(fr.value));
+}
+//
