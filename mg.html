@@ -5,12 +5,25 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap">
     <script type="text/javascript" src="mg.js" defer="true"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="mg.css">
 </head>
 <body>
 
+	<h1>Maze Generator</h1>
+
+    <div id="cont">
+        <label for="hw">height & width: </label><input type="number" name="hw" id="hw" value="400">
+        <label for="cellSize">cellSize: </label><input type="number" name="cellSize" id="s" value="40">
+        <label for="framerate">frameRate: </label><input type="number" name="framerate" id="fr" value="500">
+        <label for="linecolor">lineColor: </label><input type="text" name="linecolor" id="lc" value="red">
+        <label for="fillcolor">fillColor: </label><input type="text" name="fillcolor" id="c" value="yellow">
+        <br>
+        <button onclick="generationStart()">generate</button>
+    </div>
+    <br >
+    
 	<canvas id="canvas"></canvas>
     
 </body>
