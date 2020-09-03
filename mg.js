@@ -1,3 +1,48 @@
+//let stackarray = new Array(10).fill(null);
+let index = 0;
+
+class Stack {
+	constructor() {
+		//working
+		this.stackarray = new Array();
+	}
+	push(value) {
+		//if (index >= 10) throw 'Stack is full';
+		this.stackarray.unshift(value);
+		index++;
+		return this.stackarray;
+	}
+	pop() {
+		index--;
+		if (index < 0) {
+			index = 0;
+			throw 'Stack is empty';
+		}
+		return this.stackarray.shift();
+		//return this.stackarray;
+	}
+	static peek() {
+		return this.stackarray;
+	}
+}
+
+let myStack = new Stack();
+
+class Lines {
+	constructor() {
+		//console.log('working');
+	}
+	draw(a,b,c,d,colour) {
+		ctx.beginPath();
+		ctx.strokeStyle = colour;
+		ctx.moveTo(a, b);
+		ctx.lineTo(c, d);
+		ctx.stroke();
+		ctx.closePath();
+	}
+}
+//start==
+
 var hw = document.querySelector('#hw');
 var fr = document.querySelector('#fr');
 var s = document.querySelector('#s');
