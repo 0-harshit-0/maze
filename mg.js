@@ -1,49 +1,4 @@
-//let stackarray = new Array(10).fill(null);
-let index = 0;
 
-class Stack {
-	constructor() {
-		//working
-		this.stackarray = new Array();
-	}
-	push(value) {
-		//if (index >= 10) throw 'Stack is full';
-		this.stackarray.unshift(value);
-		index++;
-		return this.stackarray;
-	}
-	pop() {
-		index--;
-		if (index < 0) {
-			index = 0;
-			throw 'Stack is empty';
-		}
-		return this.stackarray.shift();
-		//return this.stackarray;
-	}
-	static peek() {
-		return this.stackarray;
-	}
-}
-
-let myStack = new Stack();
-
-class Lines {
-	constructor() {
-		//console.log('working');
-	}
-	draw(a,b,c,d,colour) {
-		ctx.beginPath();
-		ctx.strokeStyle = colour;
-		ctx.moveTo(a, b);
-		ctx.lineTo(c, d);
-		ctx.stroke();
-		ctx.closePath();
-	}
-}
-//start==
-
-var hw = document.querySelector('#hw');
 var fr = document.querySelector('#fr');
 var s = document.querySelector('#s');
 var lc = document.querySelector('#lc');
@@ -52,19 +7,24 @@ var c = document.querySelector('#c');
 
 var canvas = document.querySelector('#canvas');
 var ctx = canvas.getContext('2d');
-canvas.width = parseInt(hw.value);
-canvas.height = parseInt(hw.value);
+canvas.width = parseInt(500);
+canvas.height = parseInt(500);
 
-let line = new Lines();
 let wi = parseInt(s.value);
 let rows = Math.floor(canvas.height/wi);
 let cols = Math.floor(canvas.width/wi);
 let neighbour = new Array();
 let grid = new Array();
-var inter;
+let shape = new Shapes(ctx);
+var current, inter;
+let multiple = canvas.width/wi;
+
+let start, goal;
 
 class Cells {
-	constructor(i, j, color, fcolor) {
+	constructor(id, i, j, color, fcolor, f) {
+		this.pos = new Vector2D(i*wi, j*wi);
+		this.id = id;
 		this.w = wi;//can be skipped
 		this.i = i;
 		this.j = j;
@@ -72,24 +32,38 @@ class Cells {
 		this.visited = false;
 		this.c = color;
 		this.fc = fcolor;
+		//this.fValue = f;
 	}
 	static index(i, j) {
 		if (i < 0 || j < 0 || i > cols-1 || j > rows-1) {
 			return -1;
 		}else {
-			return Math.floor(j + i * rows);
+			return Math.floor(j * cols + i);
 		}
 	}
 	draw() {
 		let x = Math.floor(this.i*this.w);
 		let y = Math.floor(this.j*this.w);
 
-		if (this.walls[0]) line.draw(x, y, x+this.w, y, this.c);
-		if (this.walls[1]) line.draw(x+this.w, y, x+this.w, y+this.w, this.c);
-		if (this.walls[2]) line.draw(x+this.w, y+this.w, x, y+this.w, this.c);
-		if (this.walls[3]) line.draw(x, y+this.w, x, y, this.c);
-
-		
+		ctx.lineWidth = 5;
+		//ctx.lineCap ='round';
+		//ctx.strokeStyle = this.c;
+		if (this.walls[0]) {
+			shape.line(x, y, x+this.w, y);
+			shape.stroke(this.c);
+		}
+		if (this.walls[1]) {
+			shape.line(x+this.w, y, x+this.w, y+this.w);
+			shape.stroke(this.c);
+		}
+		if (this.walls[2]) {
+			shape.line(x+this.w, y+this.w, x, y+this.w);
+			shape.stroke(this.c);
+		}
+		if (this.walls[3]) {
+			shape.line(x, y+this.w, x, y);
+			shape.stroke(this.c);
+		}
 	}
 	drawVisit() {
 		let x = Math.floor(this.i*this.w);
@@ -97,12 +71,9 @@ class Cells {
 
 		
 		if (this.visited) {
-			
-			ctx.beginPath();
-			ctx.fillStyle = this.fc;
-			ctx.fillRect(x, y, this.w, this.w);
-			//ctx.strokeRect(x, y, this.w, this.w);
-			ctx.closePath();
+			ctx.lineWidth = 1;
+			shape.box(x, y, this.w, this.w);
+			shape.fill(this.fc);
 		}
 	}
 	checkNeighbours() {
@@ -159,32 +130,162 @@ class Cells {
 		}
 	}
 }
+
+let myGraph, target;
 //create grid
 function create() {
-	canvas.width = parseInt(hw.value);
-	canvas.height = parseInt(hw.value);
 	wi = parseInt(s.value);
 	rows = Math.floor(canvas.height/wi);
 	cols = Math.floor(canvas.width/wi);
-	neighbour = new Array();
-	grid = new Array();
+	neighbour.length = 0;
+	grid.length = 0;
+	
 
-	inter;
-
-	for (var i = 0; i < rows; i++) {
-		for (var j = 0; j < cols; j++) {
-			grid.push(new Cells(i, j, lc.value, c.value));
+	let count = 0;
+	for (var j = 0; j < cols; j++) {
+		for (var i = 0; i < rows; i++) {
+			grid.push(new Cells(count, i, j, lc.value, c.value, 0));
+			count++;
 		}
 	}
+
+	myGraph = new Graph(grid.length);
+	target = grid.length-1;
 	//step-1
-	var current;
 	grid[0].visited = true;
 	myStack.push(grid[0]);
 }
 
+let dis = new Array(), prev = new Array();
+let q, alt;
+function drawBoxes(x) {
+	
+	let ixter = setInterval((s)=> {
+		let u = s.pop();
+
+		if (grid[u] == undefined) {
+			clearInterval(ixter);
+			return;
+		}
+
+		grid[u].fc = 'yellow';
+		if (u == target) {
+			grid[u].fc = 'green';
+			console.log('complete');
+		}
+		grid[u].drawVisit();
+		grid[u].draw();
+		
+	}, 60, x);
+}
+function djkstra(root, g) {
+	grid[root].fc = 'lightgreen';
+	grid[root].drawVisit();
+	grid[root].draw();
+
+	q = new Set();
+	for (var i = 0; i < g.v; i++) {
+		dis.push(9990);
+		prev.push(undefined);
+		q.add(i);
+		
+	}
+	
+	dis[root] = 0;
+		//console.log(q.values().next().value);
+		//let curr = g.list[i];
+
+	while(q.size >= 1) {
+		let u;
+		let ver = dis.indexOf(Math.min(...dis));
+
+		if (q.has(ver)) {
+			u = ver;
+		}
+
+		if (u == target) {
+			break;
+		}
+		q.delete(u);
+
+		//console.log(q.has(1));
+		for (var i = 0; i < g.list[u].size; i++) {
+			let y = g.list[u].iterate(i);
+			q.forEach(v => {
+				if (v == y) {
+					
+					alt = dis[u]+1;
+
+
+					if (alt < dis[v]) {
+						dis[v] = alt;
+						prev[v] = u;
+					}
+				}
+			});
+		}
+		dis[ver] = 10000;
+	}
+
+	let s = new Stack();
+	let ta = target;
+
+	if (prev[ta] !== undefined || ta == root) {
+		while(ta !== undefined) {
+			s.push(ta);
+			ta = prev[ta];
+		}
+	}
+
+	drawBoxes(s);
+	return s;
+}
+
+function animationBfs(root, g) {
+	let q = new Queues();
+	let l = g.list;
+	l[root].visited = true;
+	q.push(root);
+
+	let inter = setInterval((root, qu, g) => {
+		let v = qu.pop();
+
+		if (v !== root) {
+			grid[v].drawVisit();
+			grid[v].draw();
+		}else if(v == root) {
+			grid[v].drawVisit();
+			grid[v].draw();
+		}
+		if (v == grid.length-1) {
+			grid[v].drawVisit();
+			grid[v].draw();
+
+			console.log('complete');
+			clearInterval(inter);
+		}
+
+		let connections = l[v].size;
+		for (var i = 0; i < connections; i++) {
+			let ele = l[v].remove(0);
+			if (!l[ele].visited) {
+				l[ele].visited = true;
+				qu.push(ele);
+			}
+		}
+
+
+		if (!qu.s) {
+			console.log('stop');
+			clearInterval(inter);
+		}
+	}, 60, root, q, g);
+}
+
+
 function animation() {
 	ctx.setTransform(1, 0, 0, 1, 0, 0);
-	
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	//step - 2,3,4
 	if (myStack.stackarray.length) {
 		current = myStack.pop();
@@ -193,21 +294,24 @@ function animation() {
 			var next = neighbour[Math.floor(Math.random()*neighbour.length)];
 			if (next !== undefined) {
 				Cells.removeWalls(current, next);
+				myGraph.addEdge(current.id, next.id);
 				next.visited = true;
 				myStack.push(next);
 			}
 		}
 	}else {
+		djkstra(0, myGraph)
 		console.log('done');
 		clearInterval(inter);
 	}
 
 	grid.forEach(y=>{
-		y.drawVisit();
+		//y.drawVisit();
 		y.draw();
 	});
 	
-	neighbour = new Array();
+	neighbour.length = 0;
+
 	//clearInterval(inter)
 	//requestAnimationFrame(animation);
 }
@@ -216,7 +320,6 @@ function generationStart() {
 	
 	clearInterval(inter);
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	grid = new Array();
 	create();
 	inter = setInterval(animation, parseInt(fr.value));
 }
