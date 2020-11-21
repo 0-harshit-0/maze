@@ -158,7 +158,7 @@ function create() {
 
 let dis = new Array(), prev = new Array();
 let q, alt;
-function drawBoxes(x) {
+function drawBoxes(x) {//reverse the dijkstra algo and find path
 	
 	let ixter = setInterval((s)=> {
 		let u = s.pop();
@@ -266,6 +266,9 @@ function animation() {
 	});
 	
 	neighbour.length = 0;
+
+	//clearInterval(inter)
+	//requestAnimationFrame(animation);
 }
 
 function generationStart() {
