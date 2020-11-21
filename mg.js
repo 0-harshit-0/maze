@@ -131,7 +131,7 @@ class Cells {
 	}
 }
 
-let myGraph, target, myStack;
+let myGraph, target;
 //create grid
 function create() {
 	wi = parseInt(s.value);
@@ -139,7 +139,6 @@ function create() {
 	cols = Math.floor(canvas.width/wi);
 	neighbour.length = 0;
 	grid.length = 0;
-	myStack = new Stack();
 
 	let count = 0;
 	for (var j = 0; j < cols; j++) {
