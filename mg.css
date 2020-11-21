@@ -1,23 +1,51 @@
-body{
+*{
 	font-family: 'Russo One', sans-serif;
+
+}
+
+body{
+	color: gray;
+	background: black;
+}
+h1{
 	text-align: center;
 }
 canvas{
-
+	position: relative;
+	left: 30%;
 }
 #cont{
 	text-align: center;
 	padding: 1%;
 }
 input {
-	font-family: 'Russo One', sans-serif;
+	color: gray;
 	margin: 1% 1% 1% 0%;
 	border: none;
 	border-bottom: solid;
 	width: 10%;
+	background: transparent;
 }
 button{
+	color: darkgrey;
 	cursor: pointer;
 	padding: 0.5% 1%;
-	font-family: 'Russo One', sans-serif;
+	margin: 2% 0% 0% 2%;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px grey inset;
+	background: transparent;
+	transition: box-shadow 0.5s linear;
+}
+button:hover{
+	box-shadow: 0px 0px 20px grey inset;
+}
+
+#algos{
+	color: darkgrey;
+	cursor: pointer;
+	padding: 0.5% 1%;
+	border: none;
+	border-bottom: solid;
+	background: transparent;
 }
