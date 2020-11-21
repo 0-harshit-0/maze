@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap">
-	 <script type="text/javascript" src="utility.js" defer="true"></script>
+	
+	 <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/0-harshit-0/Utility-HTML5Canvas/utility.min.js" defer="true"></script>
     <script type="text/javascript" src="mg.js" defer="true"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="mg.css">
 </head>
@@ -21,10 +22,13 @@
         <label for="fillcolor">fillColor: </label><input type="text" name="fillcolor" id="c" value="yellow">
         <br>
         <button onclick="generationStart()">generate</button>
+        <button onclick="searchStart()">find</button>
+        <select id="algos">
+            <option>Dijkstra</option>
+        </select>
     </div>
     <br >
     
 	<canvas id="canvas"></canvas>
-    
 </body>
 </html>
