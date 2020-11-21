@@ -131,7 +131,7 @@ class Cells {
 	}
 }
 
-let myGraph, target;
+let myGraph, target, myStack;
 //create grid
 function create() {
 	wi = parseInt(s.value);
@@ -139,7 +139,7 @@ function create() {
 	cols = Math.floor(canvas.width/wi);
 	neighbour.length = 0;
 	grid.length = 0;
-	
+	myStack = new Stack();
 
 	let count = 0;
 	for (var j = 0; j < cols; j++) {
@@ -167,8 +167,6 @@ function drawBoxes(x) {
 			clearInterval(ixter);
 			return;
 		}
-
-		grid[u].fc = 'yellow';
 		if (u == target) {
 			grid[u].fc = 'green';
 			console.log('complete');
@@ -178,8 +176,7 @@ function drawBoxes(x) {
 		
 	}, 60, x);
 }
-function djkstra(root, g) {
-	grid[root].fc = 'lightgreen';
+function dijkstra(root, g) {
 	grid[root].drawVisit();
 	grid[root].draw();
 
@@ -241,48 +238,6 @@ function djkstra(root, g) {
 	return s;
 }
 
-function animationBfs(root, g) {
-	let q = new Queues();
-	let l = g.list;
-	l[root].visited = true;
-	q.push(root);
-
-	let inter = setInterval((root, qu, g) => {
-		let v = qu.pop();
-
-		if (v !== root) {
-			grid[v].drawVisit();
-			grid[v].draw();
-		}else if(v == root) {
-			grid[v].drawVisit();
-			grid[v].draw();
-		}
-		if (v == grid.length-1) {
-			grid[v].drawVisit();
-			grid[v].draw();
-
-			console.log('complete');
-			clearInterval(inter);
-		}
-
-		let connections = l[v].size;
-		for (var i = 0; i < connections; i++) {
-			let ele = l[v].remove(0);
-			if (!l[ele].visited) {
-				l[ele].visited = true;
-				qu.push(ele);
-			}
-		}
-
-
-		if (!qu.s) {
-			console.log('stop');
-			clearInterval(inter);
-		}
-	}, 60, root, q, g);
-}
-
-
 function animation() {
 	ctx.setTransform(1, 0, 0, 1, 0, 0);
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -300,7 +255,7 @@ function animation() {
 			}
 		}
 	}else {
-		djkstra(0, myGraph)
+		
 		console.log('done');
 		clearInterval(inter);
 	}
@@ -311,9 +266,6 @@ function animation() {
 	});
 	
 	neighbour.length = 0;
-
-	//clearInterval(inter)
-	//requestAnimationFrame(animation);
 }
 
 function generationStart() {
@@ -323,4 +275,6 @@ function generationStart() {
 	create();
 	inter = setInterval(animation, parseInt(fr.value));
 }
-//
+function searchStart() {
+	dijkstra(0, myGraph);
+}
