@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="" />
+    <meta name="theme-color" content="#00D494">
 
     <!-- Meta tags for SEO and social sharing -->
     <link rel="canonical" href="" />
@@ -28,19 +29,52 @@
     <meta name="twitter:card" content="summary" />
     <!-- meta finish -->
 
-	<link href="/fonts/roboto-regular.woff2" type="font/woff2" rel="preload" as="font" crossorigin>
+	<link href="/assets/mono/fonts/woff2-cffbased/SometypeMono-Regular.woff2" type="font/woff2" rel="preload" as="font" crossorigin>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/0-harshit-0/Utility-HTML5Canvas@master/utility.min.js" defer="true"></script>
-    
+
     <script type="text/javascript" src="mg.js" defer="true"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="./styles/mg.css">
+    <link rel="stylesheet" href="./styles/mstyle.css">
 </head>
 <body>
 
     <div class="wrap">
-        <div class="cont leftCont">
+        <aside class="cont leftCont">
             <h1 class="mainHeading">Maze</h1>
-        </div>
-        <div class="cont rightCont"></div>
+
+            <div class="generateCont">
+                <section class="inputConts">
+                    <label for="cellSize">Cell Size:</label>
+                    <input id="s" name="cellSize" min="1" value="30"  type="number" />
+                </section>
+                <section class="inputConts">
+                    <label for="framerate">Frame rate:</label>
+                    <input id="fr" name="framerate" min="1" value="30"  type="number" />
+                </section>
+                <section class="inputConts">
+                    <label for="linecolor">Fill Color:</label>
+                    <input id="lc" name="linecolor" value="#ffffff"  type="color" />
+                </section>
+                <section class="inputConts">
+                    <label for="fillcolor">Search color:</label>
+                    <input id="c" name="fillcolor" value="#ffffff"  type="color" />
+                </section>
+                <button>Generate</button>
+            </div>
+
+            <div class="generateCont">
+                <section class="inputConts">
+                    <label for="algos">Search algo: </label>
+                    <select id="algos">
+                        <option>Dijkstra</option>
+                    </select>
+                </section>
+                <button>Find</button>
+            </div>
+        </aside>
+        <main class="cont rightCont">
+            <canvas id="canvas"></canvas>
+        </main>
     </div>
 	<!-- <h1>Maze Generator</h1>
 
@@ -58,6 +92,6 @@
     </div>
     <br >
     
-	<canvas id="canvas"></canvas> -->
+	 -->
 </body>
 </html>

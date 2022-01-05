@@ -1,15 +1,75 @@
-/*
+
 var fr = document.querySelector('#fr');
-var s = document.querySelector('#s');
+var cs = parseInt(document.querySelector('#s').value);
 var lc = document.querySelector('#lc');
 var c = document.querySelector('#c');
 
 
 var canvas = document.querySelector('#canvas');
 var ctx = canvas.getContext('2d');
-canvas.width = parseInt(500);
-canvas.height = parseInt(500);
+let timeout = false;
+function getDimensions() {
+	canvas.width = parseInt(getComputedStyle(document.querySelector('.rightCont')).width);
+	canvas.height = parseInt(getComputedStyle(document.querySelector('.rightCont')).height);
 
+	make(animate);
+}
+
+addEventListener('resize', function(e) {//debounce
+	//clearTimeout(timeout);
+	//timeout = setTimeout(getDimensions, 500);
+});
+
+let vs = new VecShapes(ctx);
+let s = new Shapes(ctx);
+
+
+class Cells{
+	constructor(x, y, length, sclr, fclr) {
+		this.pos = new Vector2D(x, y);
+		this.l = length;
+		this.sclr = sclr;
+		this.fclr = fclr;
+	}
+	draw() {
+		vs.box(this.pos, this.l, this.l);
+		vs.fill(this.fclr);
+	}
+	drawWalls() {
+		s.line(this.pos.x, this.pos.y, this.pos.x+this.l, this.pos.y);
+		s.stroke(this.sclr);
+
+		s.line(this.pos.x+this.l, this.pos.y, this.pos.x+this.l, this.pos.y+this.l);
+		s.stroke(this.sclr);
+
+		s.line(this.pos.x+this.l, this.pos.y+this.l, this.pos.x, this.pos.y+this.l);
+		s.stroke(this.sclr);
+
+		s.line(this.pos.x, this.pos.y+this.l, this.pos.x, this.pos.y);
+		s.stroke(this.sclr);
+	}
+}
+
+let store = new Array();
+function make(callback) {
+	for(let i = 0; i < canvas.width; i+= cs) {
+		for(let j = 0; j < canvas.height; j+= cs) {
+			store.push(new Cells(i, j, cs, 'black', 'white'));
+		}
+	}
+	if(callback) callback();
+}
+function animate() {
+	store.forEach(z=>{
+		z.draw();
+		z.drawWalls();
+	});
+}
+//getDimensions();
+
+
+
+/*
 let wi = parseInt(s.value);
 let rows = Math.floor(canvas.height/wi);
 let cols = Math.floor(canvas.width/wi);
@@ -17,7 +77,6 @@ let neighbour = new Array();
 let grid = new Array();
 let shape = new Shapes(ctx);
 var current, inter;
-let multiple = canvas.width/wi;
 
 let start, goal;
 
@@ -237,10 +296,12 @@ function dijkstra(root, g) {
 	drawBoxes(s);
 	return s;
 }
-
+	shape.box(0, 0, canvas.width, canvas.height);
+	shape.fill('#fff')
 function animation() {
 	ctx.setTransform(1, 0, 0, 1, 0, 0);
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	shape.box(0, 0, canvas.width, canvas.height);
+	shape.fill('#fff')
 	//step - 2,3,4
 	if (myStack.stackarray.length) {
 		current = myStack.pop();
