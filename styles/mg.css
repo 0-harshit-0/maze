@@ -1,0 +1,92 @@
+@font-face {
+  font-family: sometype;
+  src: url('../assets/mono/fonts/woff2-cffbased/SometypeMono-Regular.woff2') format('woff2');
+}
+::selection {
+  color: white;
+  background: grey;
+}
+*, *::before, *::after {
+	font-family: sometype;
+	font-display: swap;
+  box-sizing: border-box;
+  margin: 0;
+}
+html, body {
+	font-size: clamp(1rem, 0.75rem + 1.5vw, 2rem);
+  height: 100%;
+}
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img, picture, video, canvas, svg {
+  display: block;
+  max-inline-size: 100%;
+  object-fit: cover;
+  block-size: auto;
+}
+input, button, textarea, select {
+  font: inherit;
+}
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+#root, #__next {
+  isolation: isolate;
+}
+canvas{
+  -webkit-transform3d: translate(0,0,0);
+    -moz-transform3d: translate(0,0,0);
+    transform3d: translate(0,0,0);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+h1{
+	text-align: center;
+}
+canvas{
+	position: relative;
+	left: 30%;
+}
+#cont{
+	text-align: center;
+	padding: 1%;
+}
+input {
+	color: gray;
+	margin: 1% 1% 1% 0%;
+	border: none;
+	border-bottom: solid;
+	width: 10%;
+	background: transparent;
+}
+button{
+	color: darkgrey;
+	cursor: pointer;
+	padding: 0.5% 1%;
+	margin: 2% 0% 0% 2%;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px grey inset;
+	background: transparent;
+	transition: box-shadow 0.5s linear;
+}
+button:hover{
+	box-shadow: 0px 0px 20px grey inset;
+}
+
+.wrap{
+	border: solid;
+	display: grid;
+	grid-template-rows: 1fr;
+	grid-template-columns: .4fr 1fr;
+}
+
+.cont{
+	border: solid;
+}

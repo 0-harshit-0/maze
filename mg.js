@@ -1,4 +1,4 @@
-
+/*
 var fr = document.querySelector('#fr');
 var s = document.querySelector('#s');
 var lc = document.querySelector('#lc');
@@ -281,3 +281,4 @@ function generationStart() {
 function searchStart() {
 	dijkstra(0, myGraph);
 }
+*/
