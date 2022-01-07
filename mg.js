@@ -16,8 +16,8 @@ function getDimensions() {
 }
 
 addEventListener('resize', function(e) {//debounce
-	//clearTimeout(timeout);
-	//timeout = setTimeout(getDimensions, 500);
+	clearTimeout(timeout);
+	timeout = setTimeout(getDimensions, 500);
 });
 
 let vs = new VecShapes(ctx);
@@ -65,7 +65,7 @@ function animate() {
 		z.drawWalls();
 	});
 }
-//getDimensions();
+getDimensions();
 
 
 

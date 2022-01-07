@@ -39,7 +39,7 @@
 <body>
 
     <div class="wrap">
-        <aside class="cont leftCont">
+        <aside id="top" class="cont leftCont">
             <h1 class="mainHeading">Maze</h1>
 
             <div class="generateCont">
@@ -59,7 +59,7 @@
                     <label for="fillcolor">Search color:</label>
                     <input id="c" name="fillcolor" value="#ffffff"  type="color" />
                 </section>
-                <button>Generate</button>
+                <button onclick="getDimensions();">Generate</button>
             </div>
 
             <div class="generateCont">
@@ -71,6 +71,8 @@
                 </section>
                 <button>Find</button>
             </div>
+
+            <a href="#top">Back to top</a>
         </aside>
         <main class="cont rightCont">
             <canvas id="canvas"></canvas>
