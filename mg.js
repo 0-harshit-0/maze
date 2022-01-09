@@ -175,7 +175,7 @@ function animate() {
 	b++;
 	//console.log(b)
 }
-getDimensions();
+//getDimensions();
 
 
 /*
