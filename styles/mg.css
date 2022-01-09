@@ -24,6 +24,10 @@
   color: white;
   background: grey;
 }
+:root{
+	--clr: #fff;
+	--clr1: rgba(240, 240, 240, .9);
+}
 *, *::before, *::after {
 	font-display: swap;
 	font-family: sometype;
@@ -37,6 +41,7 @@ html, body {
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  background: var(--clr1);
 }
 img, picture, video, canvas, svg {
   max-inline-size: 100%;
@@ -68,11 +73,11 @@ p, h1, h2, h3, h4, h5, h6 {
 .cont{
 	display: grid;
 
-	color: white;
+	color: var(--clr1);
 	height: 90vh;
 	width: 100%;
 	border-radius: 1.5rem;
-	background: #302929;
+	background: #302929d5;
 	box-shadow: 0px 7px 9px rgba(99, 93, 93, 0.25), -8px 6px 9px rgba(99, 93, 93, 0.25), 8px 6px 9px rgba(99, 93, 93, 0.25);
 }
 
@@ -111,26 +116,28 @@ p, h1, h2, h3, h4, h5, h6 {
 	padding: 0;
 	text-decoration: underline;
 	background: transparent;
-	color: white;
+	color: var(--clr1);
 	border: 0;
+	transition: color .3s ease;
 }
 .inputConts select{
 	font-size: 1rem;
 	padding: 0;
 	text-decoration: underline;
 	background: transparent;
-	color: white;
+	color: var(--clr1);
 	border: 0;
+	transition: color .3s ease;
 }
 .generateCont button{
 	font-size: 1rem;
 	cursor: pointer;
 	border: 0;
-	background: #FFFFFF;
+	background: var(--clr1);
 	box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
 	border-radius: .5rem;
 	padding-block: 2%;
-	transition: box-shadow .4s ease-in-out, transform .4s ease-in-out;
+	transition: box-shadow .4s ease-in-out, transform .4s ease-in-out, background .3s ease;
 }
 .generateCont button:hover{
 	transform: translateY(-1px);
@@ -141,11 +148,12 @@ p, h1, h2, h3, h4, h5, h6 {
 	top: 95%;
 	left: 50%;
 	transform: translateX(-50%);
-	color: white;
+	color: var(--clr1);
 	text-align: center;
 	text-decoration: none;
 	align-self: end;
 	display: none;
+	transition: color .3s ease;
 }
 /* -----------right---------------- */
 .rightCont{
@@ -158,5 +166,5 @@ p, h1, h2, h3, h4, h5, h6 {
 #canvas{
 	display: block;
 	background: transparent;
-	border: solid 1px;
+	border: solid 1px var(--clr);
 }

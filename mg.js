@@ -21,6 +21,8 @@ let b = 0, inter;
 
 function getDimensions() {
 	clearInterval(inter);
+	var root = document.querySelector(':root');
+	root.style.setProperty('--clr', lc.value);
 	b = 0;
 	cs = parseInt(document.querySelector('#s').value);  //cell
 	let scale = 90;

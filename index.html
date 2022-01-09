@@ -41,30 +41,30 @@
 </head>
 <body>
 
-    <div class="wrap">
-        <aside id="top" class="cont leftCont">
+    <main class="wrap">
+        <aside role="complementary" id="top" class="cont leftCont">
             <h1 class="mainHeading">Maze</h1>
 
             <div class="generateCont">
                 <section class="inputConts">
                     <label for="s">Cell Size:</label>
-                    <input id="s" name="cellSize" min="1" value="40"  type="number" />
+                    <input aria-label="cell size" id="s" name="cellSize" min="1" value="40"  type="number" />
                 </section>
                 <section class="inputConts">
                     <label for="r">Maintain ratio:</label>
-                    <input id="r" type="checkbox" name="aspectRatio" checked>
+                    <input aria-label="maintain aspect ratio" id="r" type="checkbox" name="aspectRatio" checked>
                 </section>
                 <section class="inputConts">
                     <label for="fr">Frame rate:</label>
-                    <input id="fr" name="framerate" min="1" value="30"  type="number" />
+                    <input aria-label="frame rate" id="fr" name="framerate" min="1" value="30"  type="number" />
                 </section>
                 <section class="inputConts">
-                    <label for="lc">Line color:</label>
-                    <input id="lc" name="linecolor" value="#ffffff"  type="color" />
+                    <label for="lc">Fill color:</label>
+                    <input aria-label="fill color" id="lc" name="linecolor" value="#ffffff"  type="color" />
                 </section>
                 <section class="inputConts">
-                    <label for="c">search color:</label>
-                    <input id="c" name="fillcolor" value="#ffffff"  type="color" />
+                    <label for="c">Search color:</label>
+                    <input aria-label="search color" id="c" name="fillcolor" value="#ffffff"  type="color" />
                 </section>
                 <button id="generate" onclick="getDimensions();">Generate</button>
             </div>
@@ -72,7 +72,7 @@
             <div class="generateCont">
                 <section class="inputConts">
                     <label for="algos">Search algo: </label>
-                    <select id="algos">
+                    <select aria-label="search algorithm" id="algos">
                         <option>Dijkstra</option>
                     </select>
                 </section>
@@ -81,10 +81,10 @@
 
             <a href="#top">Back to top</a>
         </aside>
-        <main class="cont rightCont">
+        <div class="cont rightCont">
             <canvas id="canvas"></canvas>
-        </main>
-    </div>
+        </div>
+    </main>
 	<!-- <h1>Maze Generator</h1>
 
     <div id="cont">
