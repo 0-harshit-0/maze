@@ -1,4 +1,4 @@
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1150px) {
 	.leftCont{
 		flex: 1;
 	}
@@ -6,15 +6,17 @@
 		flex: 2;
 	}
 }
-@media only screen and (max-width: 950px) {
+@media only screen and (max-width: 750px) {
 	.wrap{
 		flex-direction: column;
+		max-width: 400px;
 	}
 	.wrap > * {
 		flex: 0 0 auto;
 	}
 
 	.leftCont{
+		grid-template-rows: .1fr .6fr .2fr .1fr;
 		padding-block: 10% 2%;
 		padding-inline: 10%;
 	}

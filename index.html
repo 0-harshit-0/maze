@@ -12,7 +12,7 @@
     <link rel="canonical" href="" />
     <meta
       name="description"
-      content=""
+      content="Maze Generation using Randomized DFS and Path Finding using Dijkstra"
     />
     <meta name="robots" content="index,follow" />
     <meta property="og:title" content="Hello World!" />
@@ -30,11 +30,14 @@
     <!-- meta finish -->
 
 	<link href="/assets/mono/fonts/woff2-cffbased/SometypeMono-Regular.woff2" type="font/woff2" rel="preload" as="font" crossorigin>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/0-harshit-0/Utility-HTML5Canvas@master/utility.min.js" defer="true"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/0-harshit-0/Utility-HTML5Canvas@master/src/vector.js" defer="true"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/0-harshit-0/Utility-HTML5Canvas@master/src/stack.js" defer="true"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/0-harshit-0/Utility-HTML5Canvas@master/src/shapes.js" defer="true"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/0-harshit-0/Utility-HTML5Canvas@master/src/graph.js" defer="true"></script>
 
     <script type="text/javascript" src="mg.js" defer="true"></script>
-    <link rel="stylesheet" type="text/css" media="screen" href="./styles/mg.css">
-    <link rel="stylesheet" href="./styles/mstyle.css">
+    <link rel="stylesheet" type="text/css" href="./styles/mg.css">
+    <link rel="stylesheet" type="text/css" href="./styles/mstyle.css">
 </head>
 <body>
 
@@ -44,22 +47,26 @@
 
             <div class="generateCont">
                 <section class="inputConts">
-                    <label for="cellSize">Cell Size:</label>
-                    <input id="s" name="cellSize" min="1" value="30"  type="number" />
+                    <label for="s">Cell Size:</label>
+                    <input id="s" name="cellSize" min="1" value="40"  type="number" />
                 </section>
                 <section class="inputConts">
-                    <label for="framerate">Frame rate:</label>
+                    <label for="r">Maintain ratio:</label>
+                    <input id="r" type="checkbox" name="aspectRatio" checked>
+                </section>
+                <section class="inputConts">
+                    <label for="fr">Frame rate:</label>
                     <input id="fr" name="framerate" min="1" value="30"  type="number" />
                 </section>
                 <section class="inputConts">
-                    <label for="linecolor">Fill Color:</label>
+                    <label for="lc">Line color:</label>
                     <input id="lc" name="linecolor" value="#ffffff"  type="color" />
                 </section>
                 <section class="inputConts">
-                    <label for="fillcolor">Search color:</label>
+                    <label for="c">search color:</label>
                     <input id="c" name="fillcolor" value="#ffffff"  type="color" />
                 </section>
-                <button onclick="getDimensions();">Generate</button>
+                <button id="generate" onclick="getDimensions();">Generate</button>
             </div>
 
             <div class="generateCont">
