@@ -1,6 +1,6 @@
 @font-face {
   font-family: sometype;
-  src: url('../assets/mono/fonts/woff2-cffbased/SometypeMono-Regular.woff2') format('woff2');
+  src: url('../assets/SometypeMono-Regular.woff2') format('woff2');
 }
 ::-webkit-scrollbar {
   width: 10px;
