@@ -121,12 +121,12 @@ function visitedNeighbours(graph, c) {
 }
 
 function DFS(graph, root) {
+	animateStore.push(root);
 	graph.AdjList.get(root).visited = true;
 	stk.push(root);
 	while(stk.length) {
 		let curr = stk.pop();
 		//console.log(curr)
-		animateStore.push(curr);
 		let sathi = [...graph.neighbors(curr)];
 		let available = visitedNeighbours(graph, curr);
 		if(available.length){
@@ -135,8 +135,65 @@ function DFS(graph, root) {
 			store[curr].removeWalls(chosen);
 			graph.AdjList.get(chosen).visited = true;
 			stk.push(chosen);
+			animateStore.push(chosen);
 		}
 	}
+}
+function dijkstra(graph, root) {
+	grid[root].drawVisit();
+	grid[root].draw();
+
+	let q = new Set();
+	const iterator1 = this.AdjList[Symbol.iterator]();
+	
+	dis[root] = 0;
+		//console.log(q.values().next().value);
+		//let curr = g.list[i];
+
+	while(q.size >= 1) {
+		let u;
+		let ver = dis.indexOf(Math.min(...dis));
+
+		if (q.has(ver)) {
+			u = ver;
+		}
+
+		if (u == target) {
+			break;
+		}
+		q.delete(u);
+
+		//console.log(q.has(1));
+		for (var i = 0; i < g.list[u].size; i++) {
+			let y = g.list[u].iterate(i);
+			q.forEach(v => {
+				if (v == y) {
+					
+					alt = dis[u]+1;
+
+
+					if (alt < dis[v]) {
+						dis[v] = alt;
+						prev[v] = u;
+					}
+				}
+			});
+		}
+		dis[ver] = 10000;
+	}
+
+	let s = new Stack();
+	let ta = target;
+
+	if (prev[ta] !== undefined || ta == root) {
+		while(ta !== undefined) {
+			s.push(ta);
+			ta = prev[ta];
+		}
+	}
+
+	drawBoxes(s);
+	return s;
 }
 
 function make(callback) {
