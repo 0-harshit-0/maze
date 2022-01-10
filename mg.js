@@ -76,19 +76,19 @@ class Cells{
 		ctx.lineCap = 'square';
 		if(this.walls[0]) {
 			s.line(this.pos.x, this.pos.y, this.pos.x+this.l, this.pos.y); //top
-			s.stroke(this.sclr, cs/2);
+			s.stroke(this.sclr, Math.floor(cs/2));
 		}
 		if(this.walls[1]) {
 			s.line(this.pos.x+this.l, this.pos.y, this.pos.x+this.l, this.pos.y+this.l); //right
-			s.stroke(this.sclr, cs/2);
+			s.stroke(this.sclr, Math.floor(cs/2));
 		}
 		if(this.walls[2]) {
 			s.line(this.pos.x+this.l, this.pos.y+this.l, this.pos.x, this.pos.y+this.l);  //bottom
-			s.stroke(this.sclr, cs/2);
+			s.stroke(this.sclr, Math.floor(cs/2));
 		}
 		if(this.walls[3]) {
 			s.line(this.pos.x, this.pos.y+this.l, this.pos.x, this.pos.y);  //left
-			s.stroke(this.sclr, cs/2);
+			s.stroke(this.sclr, Math.floor(cs/2));
 		}		
 	}
 	removeWalls(chose) {
@@ -127,15 +127,16 @@ function DFS(graph, root) {
 	while(stk.length) {
 		let curr = stk.pop();
 		//console.log(curr)
+		animateStore.push(curr);
 		let sathi = [...graph.neighbors(curr)];
 		let available = visitedNeighbours(graph, curr);
 		if(available.length){
 			stk.push(curr);
 			let chosen = available[Math.floor(Math.random()*available.length)];
-			store[curr].removeWalls(chosen);
+			//store[curr].removeWalls(chosen);
 			graph.AdjList.get(chosen).visited = true;
 			stk.push(chosen);
-			animateStore.push(chosen);
+			//animateStore.push(chosen);  better storage opt. but won't make wall disappear live
 		}
 	}
 }
@@ -221,6 +222,7 @@ function make(callback) {
 function animate() {
 	//s.clear(0,0,canvas.width,canvas.height);
 	if(animateStore[b] != undefined) {
+		store[animateStore[b]].removeWalls(animateStore[b+1]);
 		store[animateStore[b]].draw();
 	}else{
 		console.log('stop')
