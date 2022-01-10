@@ -209,7 +209,7 @@ function make(callback) {
 				g.add(count, count+1);
 			}
 			if(count+(canvas.width/cs) <= n-1) {
-				g.add(count, count+(canvas.height/cs));
+				g.add(count, count+(canvas.width/cs));
 			}
 			count++;
 		}
