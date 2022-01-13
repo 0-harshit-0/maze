@@ -1,6 +1,6 @@
-# Cryptic | image steganography
+# Maze Generation & Path Finding
 
-A static web app for encoding and decoding _text messages_ in _images_:framed_picture:.
+A static web application developed to understand Graphs, Graph traversal and path finding algorithms:
 
 <span>
 <img src='https://img.shields.io/badge/-HTML-orange' />
