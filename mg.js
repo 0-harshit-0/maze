@@ -52,10 +52,10 @@ function getDimensions() {
 	inter = setInterval(()=> {animate(false)}, parseInt(fr.value));
 }
 
-addEventListener('resize', function(e) {//debounce
+/*addEventListener('resize', function(e) {//debounce
 	clearTimeout(timeout);
 	timeout = setTimeout(getDimensions, 500);
-});
+});*/
 
 
 
