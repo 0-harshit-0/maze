@@ -2,23 +2,41 @@
 <html lang="en">
 <head>
     <title>Maze</title>
+    <!-- Meta tags for SEO, decoration and social sharing -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="" />
 
     <!-- Meta tags for SEO and social sharing -->
-    <link rel="canonical" href="" />
     <meta
       name="description"
       content="Maze Generation using Randomized DFS and Path Finding using Dijkstra"
     />
     <meta name="robots" content="index,follow" />
+    <!-- <meta property="og:title" content="Hello World!" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="" />
+    <meta
+    property="og:description"
+    content="A simple website."
+    />
+    <meta
+    property="og:image"
+    content=""
+    />
+    <meta name="twitter:card" content="summary" /> -->
+
     <!-- meta finish -->
+
+    <link rel="canonical" href="" />
+    <link rel="icon" href="./assets/Maze-16.png" />
+
+    <!-- pwa manifest linking -->
+    <!-- <link rel="manifest" href="/app.webmanifest"> -->
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/0-harshit-0/Utility-HTML5Canvas@master/utility.min.js" defer="true"></script>
 
-    <script type="text/javascript" src="mg.js" defer="true"></script>
+    <script type="module" src="script.js" defer="true"></script>
     <link rel="stylesheet" type="text/css" href="./styles/mg.css">
     <link rel="stylesheet" type="text/css" href="./styles/mstyle.css">
 </head>
@@ -47,9 +65,9 @@
                 </section>
                 <section class="inputConts">
                     <label for="c">Search color:</label>
-                    <input aria-label="search color" id="c" name="fillcolor" value="#ffffff"  type="color" />
+                    <input aria-label="search color" id="c" name="fillcolor" value="#20a1a1"  type="color" />
                 </section>
-                <button id="generate" onclick="getDimensions();">Generate</button>
+                <button id="generate">Generate</button>
             </div>
 
             <div class="generateCont">
@@ -59,7 +77,7 @@
                         <option>Dijkstra</option>
                     </select>
                 </section>
-                <button onclick="search();">Find</button>
+                <button id="search">Find</button>
             </div>
 
             <a href="#top">Back to top</a>
