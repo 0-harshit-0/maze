@@ -94,15 +94,17 @@
         // Octokit.js
         // https://github.com/octokit/core.js#readme
         const octokit = new Octokit({
-          auth: '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'
+          auth: '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'
         })
 
-        await octokit.request('POST /repos/0-harshit-0/maze/dispatches', {
+        let res = await octokit.request('POST /repos/0-harshit-0/maze/dispatches', {
           event_type: 'generate',
           client_payload: {
             msg: "hey1"
           }
         });
+
+        console.log(res)
     </script>
 	<!-- <h1>Maze Generator</h1>
 
