@@ -4,8 +4,7 @@ on:
   repository_dispatch:
     types: [generate]
 jobs:
-  run_if_failure:
-    if: ${{ !github.event.client_payload.passed }}
+  run:
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
