@@ -1,4 +1,4 @@
-import {validateDimensions, dijkstra} from "./scripts/api.js";
+import {validateDimensions, dijkstra} from "./api.js";
 
 
 // get all the input fields from html
@@ -15,8 +15,8 @@ var ctx = canvas.getContext('2d');
 let timeout = false;
 
 let vs = new VecShapes(ctx), s = new Shapes(ctx);
-let stk = new Stack(), animateStore = [], store = [];
-let asIndex = 0, inter, g, mazeGraph, creatingMaze = false, scale = 90;
+let animateStore = [], store = [];
+let asIndex = 0, inter, mazeGraph, creatingMaze = false, scale = 90;
 
 
 
@@ -95,7 +95,7 @@ function generateMaze() {
 	clearInterval(inter);
 
 	// reset the old stacks/arrays, and start new maze generation
-	stk = new Stack(), asIndex=0;
+	asIndex=0;
 	animateStore.length = 0;
 	store.length = 0;
 
@@ -150,6 +150,7 @@ function searchMaze() {
 		animate(true)
 	}, parseInt(fr.value));
 }
+
 
 
 // start generation or search animation
