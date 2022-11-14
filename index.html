@@ -87,25 +87,6 @@
             <canvas id="canvas"></canvas>
         </div>
     </main>
-
-    <script type="module">
-        import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
-
-        // Octokit.js
-        // https://github.com/octokit/core.js#readme
-        const octokit = new Octokit({
-          auth: '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'
-        })
-
-        let res = await octokit.request('POST /repos/0-harshit-0/maze/dispatches', {
-          event_type: 'generate',
-          client_payload: {
-            msg: "hey1"
-          }
-        });
-
-        console.log(res)
-    </script>
 	<!-- <h1>Maze Generator</h1>
 
     <div id="cont">
