@@ -35,6 +35,7 @@
     <!-- <link rel="manifest" href="/app.webmanifest"> -->
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/0-harshit-0/Utility-HTML5Canvas@master/utility.min.js" defer="true"></script>
+    
 
     <script type="module" src="./scripts/script.js" defer="true"></script>
     <link rel="stylesheet" type="text/css" href="./styles/mg.css">
@@ -86,6 +87,26 @@
             <canvas id="canvas"></canvas>
         </div>
     </main>
+
+    <script type="module">
+        import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
+
+        // Octokit.js
+        // https://github.com/octokit/core.js#readme
+        const octokit = new Octokit({
+          auth: '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'
+        })
+
+        await octokit.request('POST /repos/0-harshit-0/maze/dispatches', {
+          owner: '0-harshit-0',
+          repo: 'maze',
+          event_type: 'generate',
+          client_payload: {
+            passed: true,
+            message: "hey"
+          }
+        })
+    </script>
 	<!-- <h1>Maze Generator</h1>
 
     <div id="cont">
