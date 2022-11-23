@@ -1,4 +1,4 @@
-import {validateDimensions, dijkstra} from "./api.js";
+import {validateDimensions, search} from "./api.js";
 
 
 // get all the input fields from html
@@ -16,7 +16,7 @@ let timeout = false;
 
 let vs = new VecShapes(ctx), s = new Shapes(ctx);
 let animateStore = [], store = [];
-let asIndex = 0, inter, mazeGraph, creatingMaze = false, scale = 90;
+let asIndex = 0, inter, mazeGraph, creatingMaze = false, scale = 90/100;
 
 
 
@@ -105,20 +105,22 @@ function generateMaze() {
 
 	// get the the cell size
 	cs = parseInt(document.querySelector('#s').value);
+	if (!cs) return 0;
 
 	// if aspect ratio needs to be maintained then width and height are same else different
 	// scaling it to 90% of the container's dimension
 	// subtracting the remainder from the width and height, so that the there's no empty space left at the of the container
+	let contComputedStyle = getComputedStyle(document.querySelector('.rightCont'));
 	if(r.checked) {
-		let wh = Math.min(parseInt(getComputedStyle(document.querySelector('.rightCont')).width)*scale/100, parseInt(getComputedStyle(document.querySelector('.rightCont')).height)*95/100);
+		let wh = Math.min(parseInt(contComputedStyle.width)*scale, parseInt(contComputedStyle.height)*95/100);
 		if(wh%cs) {
 			wh -= wh%cs;
 		}
 		canvas.width = wh;
 		canvas.height = wh;
 	}else{
-		let w = parseInt(getComputedStyle(document.querySelector('.rightCont')).width)*scale/100;
-		let h = parseInt(getComputedStyle(document.querySelector('.rightCont')).height)*scale/100;
+		let w = parseInt(contComputedStyle.width)*scale;
+		let h = parseInt(contComputedStyle.height)*scale;
 		if(w%cs) {
 			w -= w%cs;
 		}
@@ -145,7 +147,7 @@ function generateMaze() {
 function searchMaze() {
 	if(creatingMaze) return 0;
 
-	animateStore = dijkstra(mazeGraph, 0).stackarray, asIndex=0;
+	animateStore = search(mazeGraph, 0).stackarray, asIndex=0;
 	inter = setInterval(()=> {
 		animate(true)
 	}, parseInt(fr.value));

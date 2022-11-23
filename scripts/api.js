@@ -1,14 +1,19 @@
-export function validateDimensions(width=0, height=0, cellSize=0) {
-	if (!width || !height || !cellSize) return 0;
-	
+export function validateDimensions(width=3, height=3, cellSize=1) {
+	if (!width || !height || !cellSize) throw new Error("please make sure that (width || height || cellSize) is not (null || undefined || 0)");
+	let w = width, h = height, cs = cellSize;
+
+	if(w%cs) {
+		throw new Error("please make sure that (width % cellSize == 0)");
+	}
+	if(h%cs) {
+		throw new Error("please make sure that (height % cellSize == 0)");
+	}
 	
 	// reset the old stacks/arrays, and start new maze generation
 	return createMaze(width, height, cellSize);
 }
 
-function createMaze(width=0, height=0, cellSize=0) {
-	if (!width || !height || !cellSize) return 0;
-
+function createMaze(width, height, cellSize) {
 	let maxW = width/cellSize-1;
 	let n = width/cellSize*height/cellSize;
 	const graph = new UGraph(n);
@@ -70,8 +75,20 @@ function DFS(graph, root) {
 
 // search algorithm: dijkstra
 // target is always the last cell/node in the graph
-let prev = new Array, dist = new Array(), target = 8;
-export function dijkstra(graph, root) {
+export function search(graph, root, searchAlgoId=1) {
+	if(!graph) throw new Error("graph is undefined");
+
+	if(searchAlgoId === 1) {
+		return dijkstra(graph, root);
+	}else {
+		throw new Error("no search search algorithm with id "+searchAlgoId)
+	}
+}
+
+
+function dijkstra(graph, root) {
+	let prev = new Array(), dist = new Array(), target = 8;
+
 	target = graph.v-1;
 	let q = new Set();
 	const iterator1 = graph.AdjList[Symbol.iterator]();
