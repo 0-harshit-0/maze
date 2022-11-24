@@ -1,4 +1,4 @@
-# Maze Generation & Path Finding
+# Maze Generation & Solving
 
 A static web application developed to understand _Graphs, Graph traversal and path finding algorithms_	:dart:
 
