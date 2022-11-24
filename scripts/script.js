@@ -1,4 +1,4 @@
-import {validateDimensions, search} from "./api.js";
+import {create, search} from "./api.js";
 
 
 // get all the input fields from html
@@ -132,7 +132,7 @@ function generateMaze() {
 	}
 
 	make();
-	const mazeDS = validateDimensions(canvas.width, canvas.height, cs);
+	const mazeDS = create(canvas.width, canvas.height, cs);
 	animateStore = mazeDS.mazeArr;
 	mazeGraph = mazeDS.mazeGraph;
 

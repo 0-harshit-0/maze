@@ -1,4 +1,4 @@
-export function validateDimensions(width=3, height=3, cellSize=1) {
+export function create(width=3, height=3, cellSize=1) {
 	if (!width || !height || !cellSize) throw new Error("please make sure that (width || height || cellSize) is not (null || undefined || 0)");
 	let w = width, h = height, cs = cellSize;
 
