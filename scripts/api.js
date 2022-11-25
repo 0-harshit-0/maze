@@ -75,21 +75,21 @@ function DFS(graph, root) {
 
 // search algorithm: dijkstra
 // target is always the last cell/node in the graph
-export function search(graph, root, searchAlgoId=1) {
+export function search(graph, root, target, searchAlgoId=1) {
 	if(!graph) throw new Error("graph is undefined");
+	if ([undefined, null].includes(root), [undefined, null].includes(target)) {
+		throw new Error("(root || target) is (null || undefined)")
+	}
 
 	if(searchAlgoId === 1) {
-		return dijkstra(graph, root);
+		return dijkstra(graph, root, target);
 	}else {
 		throw new Error("no search search algorithm with id "+searchAlgoId)
 	}
 }
+function dijkstra(graph, root, target) {
+	let prev = new Array(), dist = new Array();
 
-
-function dijkstra(graph, root) {
-	let prev = new Array(), dist = new Array(), target = 8;
-
-	target = graph.v-1;
 	let q = new Set();
 	const iterator1 = graph.AdjList[Symbol.iterator]();
 	

@@ -147,7 +147,7 @@ function generateMaze() {
 function searchMaze() {
 	if(creatingMaze) return 0;
 
-	animateStore = search(mazeGraph, 0).stackarray, asIndex=0;
+	animateStore = search(mazeGraph, 0, mazeGraph.v-1).stackarray, asIndex=0;
 	inter = setInterval(()=> {
 		animate(true)
 	}, parseInt(fr.value));
