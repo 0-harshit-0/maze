@@ -133,7 +133,7 @@ function generateMaze() {
 
 	make();
 	const mazeDS = create(canvas.width, canvas.height, cs);
-	animateStore = mazeDS.mazeArr;
+	animateStore = [...mazeDS.mazeArr];
 	mazeGraph = mazeDS.mazeGraph;
 
 	// start creating a maze at a given interval
