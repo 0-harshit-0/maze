@@ -1,3 +1,145 @@
+class Stack {
+	constructor() {
+		this.stackarray = new Array();
+		this.length = this.stackarray.length;
+	}
+	push(value) {
+		this.stackarray.unshift(value);
+		this.length = this.stackarray.length;
+		return value;
+	}
+	pop() {
+		if (this.length <= 0) {
+			throw 'Stack is empty';
+		}
+		const poped = this.stackarray.shift();
+		this.length = this.stackarray.length;
+		return poped;
+	}
+	view() {
+		return this.stackarray;
+	}
+}
+class Queues {
+	constructor() {
+		this.queuearray = new Array();
+		this.length = this.queuearray.length;
+	}
+	push(value) {
+		this.queuearray.push(value);
+		this.length = this.queuearray.length;
+
+		return value;
+	}
+	pop() {
+		if (!this.length) throw 'Queue is empty';
+		
+		const poped = this.queuearray.shift();
+		this.length = this.queuearray.length;
+		return poped;
+	}
+	view()  {
+		return this.queuearray;
+	}
+}
+class Node {
+	constructor(data) {
+		this.d = new Set().add(data);
+		this.visited = false;
+	}
+}
+class UGraph {
+	constructor(vertices) {
+		this.v = vertices;
+		this.AdjList = new Map();
+		this.length = 0;
+	}
+	add(v, dv) { //dv | destination vertices
+		if(v == dv) return 0;
+		if(this.AdjList.has(v)) {
+			this.AdjList.get(v).d.add(dv);
+		}else{
+			if(this.length >= this.v) return 0;
+			this.AdjList.set(v, new Node(dv));
+			this.length++;
+		}
+		if(this.AdjList.has(dv)) {
+			this.AdjList.get(dv).d.add(v);
+		}else{
+			if(this.length >= this.v) return 0;
+			this.AdjList.set(dv, new Node(v));
+			this.length++;
+		}
+	}
+	adjacent(v1, v2) {
+		return this.AdjList.get(v1).d.has(v2);
+	}
+	neighbors(v1) {
+		return this.AdjList.get(v1).d;
+	}
+	remove(v, dv=false) {
+		if(!dv) {
+			this.AdjList.delete(v);
+		}else{
+			this.AdjList.get(v).d.delete(dv);
+		}
+	}
+	view() {
+		const iterator1 = this.AdjList[Symbol.iterator]();
+
+		for (const item of iterator1) {
+			console.log(item[0]);
+			console.log(item[1].d);
+		}
+	}
+	//travers
+	dfs(root) {
+		console.log(root)
+		//console.log(this.AdjList.get(root))
+		this.AdjList.get(root).visited = true;
+		[...this.neighbors(root)].forEach(z=> {
+			if(!this.AdjList.get(z).visited){
+				this.dfs(z);
+			}
+		});
+	}
+	dfsS(root) {
+		let s = new Stack();
+		s.push(root);
+		while(s.length) {
+			root = s.pop();
+			if(!this.AdjList.get(root).visited) {
+				console.log(root)
+				this.AdjList.get(root).visited = true;
+				[...this.neighbors(root)].forEach(z=> {
+					s.push(z);
+				});
+			}
+		}
+	}
+	bfs(root) {
+		let q = new Queues();
+		this.AdjList.get(root).visited = true;
+		q.push(root);
+
+		while(q.length) {
+			let v = q.pop();
+			console.log(v);
+			//if (v == root) {}
+			[...this.neighbors(v)].forEach(z=> {
+				if(!this.AdjList.get(z).visited){
+					
+					this.AdjList.get(z).visited = true;
+					q.push(z);
+				}
+			});
+		}
+	}
+}
+
+
+
+// maze create start
 export function create(width=3, height=3, cellSize=1) {
 	if (!width || !height || !cellSize) throw new Error("please make sure that (width || height || cellSize) is not (null || undefined || 0)");
 	let w = width, h = height, cs = cellSize;
@@ -12,7 +154,6 @@ export function create(width=3, height=3, cellSize=1) {
 	// reset the old stacks/arrays, and start new maze generation
 	return createMaze(width, height, cellSize);
 }
-
 function createMaze(width, height, cellSize) {
 	let maxW = width/cellSize-1;
 	let n = width/cellSize*height/cellSize;
@@ -33,7 +174,6 @@ function createMaze(width, height, cellSize) {
 
 	return DFS(graph, 0);
 }
-
 // return the neighbours which are not visited yet
 function visitedNeighbours(graph, c) {
 	let nArray = [...graph.neighbors(c)];
@@ -70,8 +210,6 @@ function DFS(graph, root) {
 	}
 	return {mazeArr, mazeGraph};
 }
-
-
 
 // search algorithm: dijkstra
 // target is always the last cell/node in the graph

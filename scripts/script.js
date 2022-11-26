@@ -1,4 +1,4 @@
-import {create, search} from "./api.js";
+import {create, search} from "../packages/index.js";
 
 
 // get all the input fields from html
