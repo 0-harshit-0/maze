@@ -1,0 +1,25 @@
+{
+  "id": "/",
+  "name": "Maze",
+  "short_name": "Maze",
+  "description": "Generate maze using randomized DFS and Solve it using Path Finding algorithms.",
+  "start_url": "/",
+  "display": "standalone",
+  "scope": "/",
+  "lang": "en",
+  "theme_color": "black",
+  "background_color": "black",
+  "icons": [
+    {
+      "src": "assets/maze-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/maze-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

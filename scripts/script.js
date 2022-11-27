@@ -1,3 +1,7 @@
+if ('serviceWorker' in navigator) {
+   navigator.serviceWorker.register("serviceworker.js", { scope: "/" });
+}
+
 import {create, search} from "../packages/index.js";
 
 
