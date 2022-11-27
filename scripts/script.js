@@ -14,7 +14,7 @@ var canvas = document.querySelector('#canvas');
 var ctx = canvas.getContext('2d');
 let timeout = false;
 
-let vs = new VecShapes(ctx), s = new Shapes(ctx);
+let shp = new Shapes(ctx);
 let animateStore = [], store = [];
 let asIndex = 0, inter, mazeGraph, creatingMaze = false, scale = 90/100;
 
@@ -33,30 +33,31 @@ class Cells{
 		this.walls = [1,1,1,1];
 	}
 	draw() {
-		vs.box(this.pos, this.l, this.l);
-		vs.fill(this.fclr);
+		shp.rect("", this.pos.x, this.pos.y, this.l);
+		shp.fill("", this.fclr);
 	}
 	drawSearch() {
-		vs.box(this.pos, this.l, this.l);
-		vs.fill(this.searchclr);
+		shp.rect("", this.pos.x, this.pos.y, this.l);
+		shp.fill("", this.searchclr);
 	}
 	drawWalls() {
-		ctx.lineCap = 'square';
+		let lineCap = 'square';
+		let wallWidth = Math.floor(cs/4);
 		if(this.walls[0]) {
-			s.line(this.pos.x, this.pos.y, this.pos.x+this.l, this.pos.y); //top
-			s.stroke(this.sclr, Math.floor(cs/3));
+			shp.line("", this.pos.x, this.pos.y, this.pos.x+this.l, this.pos.y, lineCap); //top
+			shp.stroke("", this.sclr, wallWidth);
 		}
 		if(this.walls[1]) {
-			s.line(this.pos.x+this.l, this.pos.y, this.pos.x+this.l, this.pos.y+this.l); //right
-			s.stroke(this.sclr, Math.floor(cs/3));
+			shp.line("", this.pos.x+this.l, this.pos.y, this.pos.x+this.l, this.pos.y+this.l, lineCap); //right
+			shp.stroke("", this.sclr, wallWidth);
 		}
 		if(this.walls[2]) {
-			s.line(this.pos.x+this.l, this.pos.y+this.l, this.pos.x, this.pos.y+this.l);  //bottom
-			s.stroke(this.sclr, Math.floor(cs/3));
+			shp.line("", this.pos.x+this.l, this.pos.y+this.l, this.pos.x, this.pos.y+this.l, lineCap);  //bottom
+			shp.stroke("", this.sclr, wallWidth);
 		}
 		if(this.walls[3]) {
-			s.line(this.pos.x, this.pos.y+this.l, this.pos.x, this.pos.y);  //left
-			s.stroke(this.sclr, Math.floor(cs/3));
+			shp.line("", this.pos.x, this.pos.y+this.l, this.pos.x, this.pos.y, lineCap);  //left
+			shp.stroke("", this.sclr, wallWidth);
 		}		
 	}
 	removeWalls(chose) {
@@ -157,7 +158,7 @@ function searchMaze() {
 
 // start generation or search animation
 function animate(search) {
-	//s.clear(0,0,canvas.width,canvas.height);
+	//shp.clear(0,0,canvas.width,canvas.height);
 	if(animateStore[asIndex] != undefined && !search) {// make the maze (generate maze)
 		store[animateStore[asIndex]].removeWalls(animateStore[asIndex+1]);
 		store[animateStore[asIndex]].draw();
