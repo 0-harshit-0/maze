@@ -4,9 +4,9 @@
   "short_name": "Maze",
   "description": "Generate maze using randomized DFS and Solve it using Path Finding algorithms.",
   "start_url": "/maze/",
-  "display": "standalone",
-  "scope": "/maze",
+  "scope": "/maze/",
   "lang": "en",
+  "display": "standalone",
   "theme_color": "black",
   "background_color": "black",
   "icons": [
