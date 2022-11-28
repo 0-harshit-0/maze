@@ -5,7 +5,7 @@
   "description": "Generate maze using randomized DFS and Solve it using Path Finding algorithms.",
   "start_url": "/",
   "display": "standalone",
-  "scope": "/",
+  "scope": "/maze/",
   "lang": "en",
   "theme_color": "black",
   "background_color": "black",
