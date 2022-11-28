@@ -2,7 +2,7 @@ console.log("registered")
 
 self.addEventListener('fetch', function(event) {
 	const url = new URL(event.request.url);
-	if (event.request.method === 'POST' && url.pathname === '/receive-share') {
+	if (event.request.method === 'POST' && url.pathname === '/maze/receive-share') {
 		event.respondWith(Response.redirect('/maze/index.html'));
 
         event.waitUntil(async function () {
