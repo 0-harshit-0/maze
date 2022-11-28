@@ -219,14 +219,14 @@ dwn.addEventListener('click', () => {
 	link.remove();
 });
 shr.addEventListener('click', (e) => {
-	let file;
+	let filesArray;
 	canvas.toBlob(async blob => {
-		file = new File([blob], "maze.png");
+		filesArray = [new File([blob], "maze.png", {type: "image/png"})];
 		
-		if (navigator.canShare(file)) {
+		if (navigator.canShare({files: filesArray})) {
 			try {
 				await navigator.share({
-					files: [file],
+					files: filesArray,
 					title: 'maze',
 					text: 'maze'
 				})
