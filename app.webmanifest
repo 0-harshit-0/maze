@@ -9,6 +9,26 @@
   "display": "standalone",
   "theme_color": "black",
   "background_color": "black",
+  "share_target": {
+     "action": "/receive-share",
+     "method": "POST",
+     "enctype": "multipart/form-data",
+     "params": {
+        "title": "title",
+        "text": "text",
+        "url": "url",
+        "files": [
+          {
+            "name": "maze",
+            "accept": "image/png"
+          },
+          {
+            "name": "maze",
+            "accept": "image/jpg"
+          }
+        ]
+     }
+  },
   "icons": [
     {
       "src": "assets/maze-512.png",

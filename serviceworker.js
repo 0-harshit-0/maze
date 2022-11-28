@@ -1,16 +1,19 @@
 console.log("registered")
 
 self.addEventListener('fetch', function(event) {
-	//console.log(event)
-	event.respondWith(async function() {
-		try{
-			var res = await fetch(event.request);
-			var cache = await caches.open('cache');
-			cache.put(event.request.url, res.clone());
-			return res;
-		}
-		catch(error){
-			return caches.match(event.request);
-		}
-	}());
+	const url = new URL(event.request.url);
+	if (event.request.method === 'POST' && url.pathname === '/receive-share') {
+		event.respondWith(Response.redirect('/maze/index.html'));
+
+        event.waitUntil(async function () {
+            const client = await self.clients.get(event.resultingClientId);
+            const data = await event.request.formData();
+            let files = [];
+            data.forEach(z=> {
+                files.push(z);
+            })
+            client.postMessage({ files });
+        }());
+        return;
+	}
 });

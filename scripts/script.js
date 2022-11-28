@@ -9,6 +9,10 @@ window.addEventListener('beforeinstallprompt', (e) => {
    //console.log(deferredPrompt)
 });
 
+navigator.serviceWorker.addEventListener('message', function (e) {
+   console.log(e.data.files[0]); //contains the file(s)
+});
+
 // pwa over
 
 import {create, search} from "../packages/index.js";
