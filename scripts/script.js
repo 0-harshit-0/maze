@@ -226,7 +226,7 @@ shr.addEventListener('click', (e) => {
 		if (navigator.canShare(file)) {
 			try {
 				await navigator.share({
-					file,
+					files: [file],
 					title: 'maze',
 					text: 'maze'
 				})
