@@ -6,10 +6,12 @@
 		flex: 3;
 	}
 }
-@media only screen and (max-width: 940px) {
+@media only screen and (max-width: 1000px) {
+	.cont {
+		font-size: .6rem;
+	}
 	.leftCont{
 		flex: 1;
-		font-size: .55rem;
 	}
 	.rightCont{
 		flex: 2;
@@ -23,30 +25,16 @@
 		flex: 0 0 auto;
 	}
 
-	.leftCont{
-		grid-template-rows: .1fr .6fr .2fr .1fr;
-		font-size: .7rem;
+	.cont {
+		font-size: .8rem;
 	}
 	.mainHeading{
 		font-size: 1.5rem;
 	}
-
-	.rightCont{
-		padding-block: 7%;
-		padding-inline: 7%;
-	}
-	#top>a{
-		display: initial;
-	}
-
-	.rightCont{
-		padding-inline: 3%;
-		padding-block: 3%;
-	}
 }
 
 @media only screen and (max-width: 500px) {
-	.leftCont{
+	.cont{
 		font-size: 1rem;
 	}
 	.mainHeading{

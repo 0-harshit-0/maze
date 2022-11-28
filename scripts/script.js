@@ -1,26 +1,35 @@
+// pwa things
 if ('serviceWorker' in navigator) {
    navigator.serviceWorker.register("serviceworker.js");
 }
+
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+   deferredPrompt = e;
+   //console.log(deferredPrompt)
+});
+
+// pwa over
 
 import {create, search} from "../packages/index.js";
 
 
 // get all the input fields from html
-var fr = document.querySelector('#fr');  //frame rate
-var cs = parseInt(document.querySelector('#s').value);  //cell
-var r = document.querySelector('#r');  //ratio
-var lc = document.querySelector('#lc');  //line clr
-var c = document.querySelector('#c');  //search clr
+const fr = document.querySelector('#fr');  //frame rate
+const r = document.querySelector('#r');  //ratio
+const lc = document.querySelector('#lc');  //line clr
+const c = document.querySelector('#c');  //search clr
+let cs = parseInt(document.querySelector('#s').value);  //cell
 
 
 
-var canvas = document.querySelector('#canvas');
-var ctx = canvas.getContext('2d');
+const canvas = document.querySelector('#canvas');
+const ctx = canvas.getContext('2d');
 let timeout = false;
 
-let shp = new Shapes(ctx);
+const shp = new Shapes(ctx);
 let animateStore = [], store = [];
-let asIndex = 0, inter, mazeGraph, creatingMaze = false, scale = 90/100;
+let asIndex = 0, inter, mazeGraph, creatingMaze = false, scale = 100/100;
 
 
 
@@ -104,8 +113,8 @@ function generateMaze() {
 	animateStore.length = 0;
 	store.length = 0;
 
-	// change the css color variable value to search color input field
-	var root = document.querySelector(':root');
+	// change the css color constiable value to search color input field
+	const root = document.querySelector(':root');
 	root.style.setProperty('--clr', lc.value);
 
 	// get the the cell size
@@ -115,9 +124,9 @@ function generateMaze() {
 	// if aspect ratio needs to be maintained then width and height are same else different
 	// scaling it to 90% of the container's dimension
 	// subtracting the remainder from the width and height, so that the there's no empty space left at the of the container
-	let contComputedStyle = getComputedStyle(document.querySelector('.rightCont'));
+	let contComputedStyle = getComputedStyle(document.querySelector('.canvasCont'));
 	if(r.checked) {
-		let wh = Math.min(parseInt(contComputedStyle.width)*scale, parseInt(contComputedStyle.height)*95/100);
+		let wh = Math.min(parseInt(contComputedStyle.width)*scale, parseInt(contComputedStyle.height)*scale);
 		if(wh%cs) {
 			wh -= wh%cs;
 		}
@@ -185,12 +194,48 @@ function animate(search) {
 
 
 
-var gen = document.querySelector('#generate');
-var sch = document.querySelector('#search');
+const gen = document.querySelector('#generate');
+const sch = document.querySelector('#search');
+const ins = document.querySelector('#install'); // install pwa
+const dwn = document.querySelector('#download'); // download canvas
+const shr = document.querySelector('#share'); // share canvas
 
 gen.addEventListener('click', () => {
 	generateMaze();
 });
 sch.addEventListener('click', () => {
 	searchMaze();
+});
+
+ins.addEventListener('click', () => {
+	deferredPrompt.prompt();
+});
+
+dwn.addEventListener('click', () => {
+	var link = document.createElement('a');
+	link.download = 'maze.png';
+	link.href = canvas.toDataURL();
+	link.click();
+	link.remove();
+});
+shr.addEventListener('click', (e) => {
+	let file;
+	canvas.toBlob(async blob => {
+		file = new File([blob], "maze.png");
+		
+		if (navigator.canShare(file)) {
+			try {
+				await navigator.share({
+					file,
+					title: 'maze',
+					text: 'maze'
+				})
+				console.log('Shared!');
+			} catch (error) {
+				alert(`Error: ${error.message}`);
+			}
+		} else {
+			alert(`Your system doesn't support sharing these file.`);
+		}
+	});
 });
