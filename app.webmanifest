@@ -10,7 +10,7 @@
   "theme_color": "black",
   "background_color": "black",
   "share_target": {
-     "action": "/receive-share",
+     "action": "/maze/receive-share",
      "method": "POST",
      "enctype": "multipart/form-data",
      "params": {
