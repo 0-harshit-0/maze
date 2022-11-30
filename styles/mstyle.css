@@ -28,6 +28,9 @@
 	.cont {
 		font-size: .8rem;
 	}
+	.leftCont {
+		grid-template-rows: 7% 60% 20% 13%;
+	}
 	.mainHeading{
 		font-size: 1.5rem;
 	}

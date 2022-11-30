@@ -124,7 +124,7 @@ code {
 .leftCont{
 	flex: 1;
 
-	grid-template-rows: .1fr .6fr .2fr .15fr;
+	grid-template-rows: 10% 60% 20% 10%;
 
 	position: relative;
 	padding-inline: 30px;
