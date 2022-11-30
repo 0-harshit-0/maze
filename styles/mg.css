@@ -195,7 +195,29 @@ code {
 	background: transparent;
 	color: var(--clr1);
 	border: none;
+
+	position: relative;
 }
+
+/* tooltip */
+.rightCont .rightHeaderCont .optionCont button::before {
+	display: none;
+	position: absolute;
+	top: -90%;
+	left: -40px;
+	width: 100px;
+	text-align: center;
+}
+.rightCont .rightHeaderCont .optionCont button:nth-child(1)::before {
+	content: "download";
+}
+.rightCont .rightHeaderCont .optionCont button:nth-child(2)::before {
+	content: "share";
+}
+.rightCont .rightHeaderCont .optionCont button:hover::before {
+	display: initial;
+}
+/* tooltip over */
 
 .rightCont .canvasCont {
 	display: grid;
@@ -205,7 +227,6 @@ code {
 	height: 100%;
 }
 .rightCont .canvasCont #canvas{
-	
 	display: block;
 	background: transparent;
 	border: solid 1px var(--clr);
