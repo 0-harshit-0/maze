@@ -6,6 +6,7 @@ if ('serviceWorker' in navigator) {
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (e) => {
    deferredPrompt = e;
+   ins.style.display = "initial";
    //console.log(deferredPrompt)
 });
 
@@ -210,7 +211,6 @@ gen.addEventListener('click', () => {
 sch.addEventListener('click', () => {
 	searchMaze();
 });
-
 ins.addEventListener('click', () => {
 	deferredPrompt.prompt();
 });
