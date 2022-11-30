@@ -45,10 +45,10 @@ self.addEventListener('fetch', function(event) {
 });
 
 // caching all the resources on install
-const urlsToCache = ["/", "/styles/mstyle.css", "/styles/mg.css", "/scripts/script.js", "/packages/index.js",
+const urlsToCache = ["/maze/", "/maze/styles/mstyle.css", "/maze/styles/mg.css", "/maze/scripts/script.js", "/maze/packages/index.js",
     "https://cdn.jsdelivr.net/gh/0-harshit-0/Utility-HTML5Canvas@master/src/shapes.min.js",
     "https://cdn.jsdelivr.net/gh/0-harshit-0/Utility-HTML5Canvas@master/src/vector.min.js",
-    "/assets/SometypeMono-Regular.woff2", "/assets/maze-16.png", "/assets/maze-512.png"];
+    "/maze/assets/SometypeMono-Regular.woff2", "/maze/assets/maze-16.png", "/maze/assets/maze-512.png", "/maze/app.webmanifest"];
 self.addEventListener("install", (event) => {
     console.log("caching");
     event.waitUntil(
