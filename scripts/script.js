@@ -8,7 +8,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
    deferredPrompt = e;
 
    // show install button if install prompt is present
-   ins.style.display = "initial";
+   if (ins) {ins.style.display = "initial";}
 });
 
 navigator.serviceWorker.addEventListener('message', function (e) {
@@ -212,6 +212,8 @@ gen.addEventListener('click', () => {
 sch.addEventListener('click', () => {
 	searchMaze();
 });
+
+if (deferredPrompt) {ins.style.display = "initial";}
 ins.addEventListener('click', () => {
 	deferredPrompt.prompt();
 });
