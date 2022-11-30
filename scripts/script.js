@@ -6,8 +6,9 @@ if ('serviceWorker' in navigator) {
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (e) => {
    deferredPrompt = e;
+
+   // show install button if install prompt is present
    ins.style.display = "initial";
-   //console.log(deferredPrompt)
 });
 
 navigator.serviceWorker.addEventListener('message', function (e) {
