@@ -14,3 +14,11 @@ A static web application developed to understand _Graphs, Graph traversal and pa
 - create maze of different size and color.
 - path finding algorithm like Dijkstra(add more in fututre) to solve the maze.
 - save the maze by right clicking on the maze > save iamge as.. || copy image as..
+
+<!--
+v2:
+add ML
+more shapes
+maze of images
+multiplayer
+-->
