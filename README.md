@@ -8,6 +8,7 @@ A static web application developed to understand _Graphs, Graph traversal and pa
 <img src='https://img.shields.io/badge/-JavaScript-yellow' />
 <img src='https://img.shields.io/badge/-HTML5 Canvas-green' />
 <img src='https://img.shields.io/badge/-Utility Canvas Library-purple' />
+<img src='https://img.shields.io/badge/-PWA-violet' />
 </span>
 <hr>
 
