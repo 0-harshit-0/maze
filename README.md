@@ -21,6 +21,5 @@ A static web application developed to understand _Graphs, Graph traversal and pa
 ## Library used:
 This application is using JS(npm version) but if you want to try in case you are a python lover,
 - NPM: https://www.npmjs.com/package/@0-harshit-0/maze-generator-and-solver
-- PIP: https://pypi.org/project/maze-generator-and-solver/
 
 
