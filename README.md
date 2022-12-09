@@ -12,6 +12,7 @@ A static web application developed to understand _Graphs, Graph traversal and pa
 </span>
 <hr>
 
+- PWA enabled, you can install it and play with it even if you are offline.
 - create maze of different size and color.
 - path finding algorithm like Dijkstra(add more in fututre) to solve the maze.
 - save the maze by right clicking on the maze > save iamge as.. || copy image as..
