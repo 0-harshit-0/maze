@@ -108,6 +108,8 @@ function make() {
 			count++;
 		}
 	}
+	store[0].walls[3] = 0;
+	store[store.length-1].walls[1] = 0;
 }
 
 function generateMaze() {
@@ -185,7 +187,7 @@ function animate(search) {
 		store[animateStore[asIndex]].drawSearch();
 	}else{ // when any of the above process is finished
 		if(creatingMaze) {creatingMaze = false;}
-		console.log('stop')
+		console.log('stop');
 		animateStore.length = 0;
 		clearInterval(inter);
 	}
