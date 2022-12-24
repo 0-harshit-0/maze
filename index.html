@@ -35,7 +35,7 @@
     <link rel="apple-touch-icon" href="./assets/maze-512.png">
 
     <!-- scripts -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/0-harshit-0/Utility-HTML5Canvas@master/src/shapes.min.js" defer></script>
+    <script type="text/javascript" src="./scripts/shapes.js" defer></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/0-harshit-0/Utility-HTML5Canvas@master/src/vector.min.js" defer></script>
     
     <script type="module" src="./scripts/script.js" defer></script>
@@ -56,8 +56,12 @@
 
             <div class="leftSubCont">
                 <section class="inputConts">
-                    <label for="s">Cell Size:</label>
-                    <input aria-label="cell size" id="s" name="cellSize" min="1" value="150"  type="number" />
+                    <label for="cs">Cell Size:</label>
+                    <input aria-label="cell size" id="cs" name="cellSize" min="1" value="150"  type="number" />
+                </section>
+                <section class="inputConts">
+                    <label for="sp">Shape:</label>
+                    <input aria-label="shape" id="sp" name="shape" min="3" value="4"  type="number" />
                 </section>
                 <section class="inputConts">
                     <label for="r">Maintain ratio:</label>

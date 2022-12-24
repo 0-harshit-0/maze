@@ -25,15 +25,15 @@ const fr = document.querySelector('#fr');  //frame rate
 const r = document.querySelector('#r');  //ratio
 const lc = document.querySelector('#lc');  //line clr
 const c = document.querySelector('#c');  //search clr
-let cs = parseInt(document.querySelector('#s').value);  //cell
+const cs = document.querySelector('#cs');  //cellsize
+const sp = document.querySelector('#sp');  //shape
 
 
 
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
-let timeout = false;
+const shape = new Shapes(ctx);
 
-const shp = new Shapes(ctx);
 let animateStore = [], store = [];
 let asIndex = 0, inter, mazeGraph, creatingMaze = false, scale = 100/100;
 
@@ -46,38 +46,51 @@ class Cells{
 		this.id = id;
 		this.pos = new Vector2D(x, y);
 		this.l = length;
-		this.sclr = '#302929';
+		this.theta = (180/parseInt(sp.value))*Math.PI/180;
+		this.wclr = '#302929';
 		this.fclr = lc.value;
 		this.searchclr = c.value;
-		this.walls = [1,1,1,1];
+		this.walls = [];
+		for (let i=0; i < parseInt(sp.value); i++) {
+			this.walls.push(1);
+		}
+		this.wallWidth =  Math.floor(parseInt(cs.value)/5);
 	}
 	draw() {
-		shp.rect("", this.pos.x, this.pos.y, this.l);
-		shp.fill("", this.fclr);
+		shape.polygon("", this.pos.x+this.l/2, this.pos.y+this.l/2, (this.l*17/20)/*-(this.wallWidth)*/, parseInt(sp.value), this.theta);
+		shape.fill("", this.fclr);
 	}
 	drawSearch() {
-		shp.rect("", this.pos.x, this.pos.y, this.l);
-		shp.fill("", this.searchclr);
+		shape.polygon("", this.pos.x+this.l/2, this.pos.y+this.l/2, this.l*17/20, parseInt(sp.value), this.theta);
+		shape.fill("", this.searchclr);
 	}
 	drawWalls() {
 		let lineCap = 'square';
-		let wallWidth = Math.floor(cs/4);
+		/*let deg = 0*Math.PI/180;
+		
+		for (let i = 0; i < this.walls.length; i++) {
+			let z = this.walls[i];
+			if (z) {
+				shape.line("", ((this.l)*Math.cos(deg)) + this.pos.x, ((this.l)*Math.sin(deg)) + this.pos.y, this.pos.x++this.l, this.pos.y+((this.l)*Math.sin(deg)), 0, lineCap);
+				shape.stroke("", this.wclr, this.wallWidth);
+			}
+		}*/
 		if(this.walls[0]) {
-			shp.line("", this.pos.x, this.pos.y, this.pos.x+this.l, this.pos.y, lineCap); //top
-			shp.stroke("", this.sclr, wallWidth);
+			shape.line("", this.pos.x, this.pos.y, this.pos.x+this.l, this.pos.y, lineCap); //top
+			shape.stroke("", this.sclr, wallWidth);
 		}
 		if(this.walls[1]) {
-			shp.line("", this.pos.x+this.l, this.pos.y, this.pos.x+this.l, this.pos.y+this.l, lineCap); //right
-			shp.stroke("", this.sclr, wallWidth);
+			shape.line("", this.pos.x+this.l, this.pos.y, this.pos.x+this.l, this.pos.y+this.l, lineCap); //right
+			shape.stroke("", this.sclr, wallWidth);
 		}
 		if(this.walls[2]) {
-			shp.line("", this.pos.x+this.l, this.pos.y+this.l, this.pos.x, this.pos.y+this.l, lineCap);  //bottom
-			shp.stroke("", this.sclr, wallWidth);
+			shape.line("", this.pos.x+this.l, this.pos.y+this.l, this.pos.x, this.pos.y+this.l, lineCap);  //bottom
+			shape.stroke("", this.sclr, wallWidth);
 		}
 		if(this.walls[3]) {
-			shp.line("", this.pos.x, this.pos.y+this.l, this.pos.x, this.pos.y, lineCap);  //left
-			shp.stroke("", this.sclr, wallWidth);
-		}		
+			shape.line("", this.pos.x, this.pos.y+this.l, this.pos.x, this.pos.y, lineCap);  //left
+			shape.stroke("", this.sclr, wallWidth);
+		}
 	}
 	removeWalls(chose) {
 		if(this.id-chose == 1) {
@@ -100,11 +113,11 @@ class Cells{
 
 // store all the cells in a graph
 function make() {
+	let tcs = parseInt(cs.value), count=0;
 	creatingMaze = true;
-	let count = 0;
-	for(let i = 0; i < canvas.height; i+= cs) {
-		for(let j = 0; j < canvas.width; j+= cs) {
-			store.push(new Cells(count, j, i, cs, 'black', 'white'));
+	for(let i = 0; i < canvas.height; i+= tcs) {
+		for(let j = 0; j < canvas.width; j+= tcs) {
+			store.push(new Cells(count, j, i, tcs, 'black', 'white'));
 			count++;
 		}
 	}
@@ -124,8 +137,8 @@ function generateMaze() {
 	root.style.setProperty('--clr', lc.value);
 
 	// get the the cell size
-	cs = parseInt(document.querySelector('#s').value);
-	if (!cs) return 0;
+	let tcs = parseInt(cs.value);
+	if (!tcs) return 0;
 
 	// if aspect ratio needs to be maintained then width and height are same else different
 	// scaling it to 90% of the container's dimension
@@ -133,26 +146,26 @@ function generateMaze() {
 	let contComputedStyle = getComputedStyle(document.querySelector('.canvasCont'));
 	if(r.checked) {
 		let wh = Math.min(parseInt(contComputedStyle.width)*scale, parseInt(contComputedStyle.height)*scale);
-		if(wh%cs) {
-			wh -= wh%cs;
+		if(wh%tcs) {
+			wh -= wh%tcs;
 		}
 		canvas.width = wh;
 		canvas.height = wh;
 	}else{
 		let w = parseInt(contComputedStyle.width)*scale;
 		let h = parseInt(contComputedStyle.height)*scale;
-		if(w%cs) {
-			w -= w%cs;
+		if(w%tcs) {
+			w -= w%tcs;
 		}
-		if(h%cs) {
-			h -= h%cs;
+		if(h%tcs) {
+			h -= h%tcs;
 		}
 		canvas.width = w;
 		canvas.height = h;
 	}
 
 	make();
-	const mazeDS = create(canvas.width, canvas.height, cs);
+	const mazeDS = create(canvas.width, canvas.height, tcs);
 	animateStore = [...mazeDS.mazeArr];
 	mazeGraph = mazeDS.mazeGraph;
 
@@ -177,7 +190,7 @@ function searchMaze() {
 
 // start generation or search animation
 function animate(search) {
-	//shp.clear(0,0,canvas.width,canvas.height);
+	//shape.clear(0,0,canvas.width,canvas.height);
 	if(animateStore[asIndex] != undefined && !search) {// make the maze (generate maze)
 		store[animateStore[asIndex]].removeWalls(animateStore[asIndex+1]);
 		store[animateStore[asIndex]].draw();
