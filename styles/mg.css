@@ -198,6 +198,11 @@ body {
 	position: relative;
 }
 
+.right-header-cont path {
+	transition: .3s cubic-bezier(0.18, -0.15, 0.27, 3.55);
+}
+
+
 /* tooltip */
 .right-header-cont button::before {
 	display: none;
@@ -210,9 +215,14 @@ body {
 .right-header-cont button:nth-child(1)::before {
 	content: "options";
 }
+
 .right-header-cont .quick-options button:nth-child(1)::before {
 	content: "download";
 }
+.right-header-cont .quick-options button:nth-child(1):hover path:nth-child(2) {
+	transform: translate(0, -2px);
+}
+
 .right-header-cont .quick-options button:nth-child(2)::before {
 	content: "share";
 }
@@ -220,7 +230,6 @@ body {
 	display: initial;
 }
 /* tooltip over */
-
 
 .right-header-cont .quick-options {
 	justify-self: right;
