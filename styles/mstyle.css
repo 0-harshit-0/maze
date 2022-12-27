@@ -1,8 +1,8 @@
 @media only screen and (max-width: 1150px) {
-	.leftCont{
+	.left-cont{
 		flex: 1;
 	}
-	.rightCont{
+	.right-cont{
 		flex: 3;
 	}
 }
@@ -10,28 +10,38 @@
 	.cont {
 		font-size: .6rem;
 	}
-	.leftCont{
+	.left-cont{
 		flex: 1;
 	}
-	.rightCont{
+	.right-cont{
 		flex: 2;
 	}
 }
 @media only screen and (max-width: 820px) {
-	.wrap{
+	body{
 		flex-direction: column;
 	}
-	.wrap > * {
-		flex: 0 0 auto;
+
+	.mobile {
+		display: initial;
 	}
 
 	.cont {
+		block-size: calc(100% - 30px);
 		font-size: .8rem;
 	}
-	.leftCont {
+	.left-cont {
+		flex: 1;
+
+		display: none;
 		grid-template-rows: 7% 60% 20% 13%;
+
+		position: absolute;
 	}
-	.mainHeading{
+	.right-cont {
+		flex: 1;
+	}
+	.main-heading{
 		font-size: 1.5rem;
 	}
 }
@@ -40,7 +50,7 @@
 	.cont{
 		font-size: 1rem;
 	}
-	.mainHeading{
+	.main-heading{
 		font-size: 2rem;
 	}
 }

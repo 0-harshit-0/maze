@@ -132,7 +132,7 @@ function generateMaze() {
 	// if aspect ratio needs to be maintained then width and height are same else different
 	// scaling it to 90% of the container's dimension
 	// subtracting the remainder from the width and height, so that the there's no empty space left at the of the container
-	let contComputedStyle = getComputedStyle(document.querySelector('.canvasCont'));
+	let contComputedStyle = getComputedStyle(document.querySelector('.canvas-cont'));
 	if(r.checked) {
 		let wh = Math.min(parseInt(contComputedStyle.width)*scale, parseInt(contComputedStyle.height)*scale);
 		if(wh%cs) {
@@ -158,6 +158,8 @@ function generateMaze() {
 	animateStore = [...mazeDS.mazeArr];
 	mazeGraph = mazeDS.mazeGraph;
 
+	console.log(mazeDS)
+
 	// start creating a maze at a given interval
 	inter = setInterval(()=> {
 		animate(false)
@@ -168,6 +170,7 @@ function generateMaze() {
 
 function searchMaze() {
 	if(creatingMaze) return 0;
+	creatingMaze = true;
 
 	animateStore = search(mazeGraph, 0, mazeGraph.v-1).stackarray, asIndex=0;
 	inter = setInterval(()=> {
@@ -201,10 +204,11 @@ function animate(search) {
 
 
 
-
+const leftCont = document.querySelector(".left-cont");
 const gen = document.querySelector('#generate');
 const sch = document.querySelector('#search');
 const ins = document.querySelector('#install'); // install pwa
+const mop = document.querySelector('#more-options'); // download canvas
 const dwn = document.querySelector('#download'); // download canvas
 const shr = document.querySelector('#share'); // share canvas
 
@@ -215,11 +219,21 @@ sch.addEventListener('click', () => {
 	searchMaze();
 });
 
+// if not installed, show install button
 if (deferredPrompt) {ins.style.display = "initial";}
 ins.addEventListener('click', () => {
 	deferredPrompt.prompt();
 });
 
+
+// more options
+mop.addEventListener("click", (e) => {
+	let display = leftCont.style.display;
+	(display == "" || display == "none") ? display = "grid" : display = "none";
+	leftCont.style.display = display;
+});
+
+// donwload maze in png format
 dwn.addEventListener('click', () => {
 	var link = document.createElement('a');
 	link.download = 'maze.png';
@@ -227,6 +241,7 @@ dwn.addEventListener('click', () => {
 	link.click();
 	link.remove();
 });
+// share maze image
 shr.addEventListener('click', (e) => {
 	let filesArray;
 	canvas.toBlob(async blob => {

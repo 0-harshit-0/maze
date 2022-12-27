@@ -1,5 +1,5 @@
 ::-webkit-scrollbar {
-  width: 10px;
+  inline-size: 10px;
 }
 
 /* Track */
@@ -58,10 +58,10 @@ html {
 }
 html, body {
   font-size: clamp(1rem, 0.75rem + 1.5vw, 2rem);
-  height: 100%;
+  block-size: 100vh;
 }
 body {
-  line-height: 1.5;
+  line-block-size: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -91,24 +91,25 @@ code {
 /* css reset over */
 
 
-.wrap{
+body {
 	display: flex;
-	gap: 4%;
+	gap: 30px;
 
-	height: 100vh;
-	max-width: 1540px;
+	max-inline-size: 1540px;
 	margin-inline: auto;
 	overflow: auto;
-	padding-inline: 4%;
-	padding-block: 2%;
+	padding-inline: 25px;
+	padding-block: 15px;
 	background: var(--clr1);
 }
-.cont{
+.mobile {
+	display: none;
+}
+.cont {
 	display: grid;
 
 	color: var(--clr1);
-	height: 100%;
-	width: 100%;
+	block-size: 100%;
 	border-radius: 1rem;
 	background: #302929d5;
 	padding-block: 20px;
@@ -116,28 +117,30 @@ code {
 	font-size: .5rem;
 	box-shadow: 0px 7px 9px rgba(99, 93, 93, 0.25), -8px 6px 9px rgba(99, 93, 93, 0.25), 8px 6px 9px rgba(99, 93, 93, 0.25);
 }
-.mainHeading{
+.main-heading {
 	font-size: 1.2rem;
 	text-align: center;
 }
 
-.leftCont{
+.left-cont {
 	flex: 1;
 
 	grid-template-rows: 10% 60% 20% 10%;
 
 	position: relative;
+
+	backdrop-filter: blur(7px);
 	padding-inline: 30px;
 }
 
-.leftSubCont{
+.left-sub-cont {
 	display: grid;
 	grid-auto-flow: row;
 	align-content: space-evenly;
 
-	width: 100%;
+	inline-size: 100%;
 }
-.leftSubCont button{
+.left-sub-cont button {
 	border: 0;
 	background: var(--clr1);
 	box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
@@ -145,23 +148,23 @@ code {
 	padding-block: 5px;
 	transition: box-shadow .3s ease-in-out, transform .3s ease-in-out, background .3s ease;
 }
-.leftSubCont button:hover{
+.left-sub-cont button:hover {
 	transform: translateY(-1px);
 	box-shadow: 0px 8px 10px rgba(0, 0, 0, .51);
 }
 
-.inputConts{
+.left-cont .input-conts{
 	display: grid;
 	grid-template-columns: minmax(7ch, 15ch) minmax(9ch, 9ch);
 	justify-content: space-between;
 	align-items: center;
 }
-.inputConts label{
-	width: auto;
+.left-cont .input-conts label {
+	inline-size: auto;
 }
-.inputConts input, select{
+.left-cont .input-conts input, select {
   text-align: center;
-  width: 100%;
+  inline-size: 100%;
 	padding: 0;
 	text-decoration: underline;
 	background: transparent;
@@ -173,24 +176,20 @@ code {
 
 
 /* -----------right---------------- */
-.rightCont{
+.right-cont {
 	flex: 3;
 
 	grid-template-rows: 10% auto;
 	align-items: start;
 }
 
-.rightCont .rightHeaderCont {
+.right-header-cont {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
 
-.rightCont .rightHeaderCont .optionCont{
-	justify-self: right;
-	width: max-content;
-}
-.rightCont .rightHeaderCont .optionCont button{
+.right-header-cont button {
 	aspect-ratio: 1;
 	background: transparent;
 	color: var(--clr1);
@@ -200,33 +199,42 @@ code {
 }
 
 /* tooltip */
-.rightCont .rightHeaderCont .optionCont button::before {
+.right-header-cont button::before {
 	display: none;
 	position: absolute;
-	top: -90%;
+	top: -80%;
 	left: -40px;
-	width: 100px;
+	inline-size: 100px;
 	text-align: center;
 }
-.rightCont .rightHeaderCont .optionCont button:nth-child(1)::before {
+.right-header-cont button:nth-child(1)::before {
+	content: "options";
+}
+.right-header-cont .quick-options button:nth-child(1)::before {
 	content: "download";
 }
-.rightCont .rightHeaderCont .optionCont button:nth-child(2)::before {
+.right-header-cont .quick-options button:nth-child(2)::before {
 	content: "share";
 }
-.rightCont .rightHeaderCont .optionCont button:hover::before {
+.right-header-cont button:hover::before {
 	display: initial;
 }
 /* tooltip over */
 
-.rightCont .canvasCont {
+
+.right-header-cont .quick-options {
+	justify-self: right;
+	inline-size: max-content;
+}
+
+.canvas-cont {
 	display: grid;
 	place-items: center;
 
-	width: 100%;
-	height: 100%;
+	inline-size: 100%;
+	block-size: 100%;
 }
-.rightCont .canvasCont #canvas{
+.canvas-cont #canvas{
 	display: block;
 	background: transparent;
 	border: solid 1px var(--clr);
