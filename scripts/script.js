@@ -15,6 +15,8 @@ navigator.serviceWorker.addEventListener('message', function (e) {
    console.log(e.data.files[0]); //contains the file(s)
 });
 
+const relatedApps = await navigator.getInstalledRelatedApps();
+const PWAisInstalled = relatedApps.length > 0;
 // pwa over
 
 import {create, search} from "../packages/index.js";
@@ -167,7 +169,7 @@ function generateMaze() {
 
 
 function searchMaze() {
-	if(creatingMaze) return 0;
+	if(creatingMaze || !mazeGraph) return 0;
 	creatingMaze = true;
 
 	animateStore = search(mazeGraph, 0, mazeGraph.v-1).stackarray, asIndex=0;
@@ -221,7 +223,7 @@ sch.addEventListener('click', () => {
 // if not installed, show install button
 if (deferredPrompt) {ins.style.display = "initial";}
 ins.addEventListener('click', () => {
-	deferredPrompt.prompt();
+	console.log(deferredPrompt.prompt());
 });
 
 
