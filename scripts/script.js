@@ -158,8 +158,6 @@ function generateMaze() {
 	animateStore = [...mazeDS.mazeArr];
 	mazeGraph = mazeDS.mazeGraph;
 
-	console.log(mazeDS)
-
 	// start creating a maze at a given interval
 	inter = setInterval(()=> {
 		animate(false)
