@@ -205,6 +205,7 @@ function animate(search) {
 
 
 const leftCont = document.querySelector(".left-cont");
+const rightCont = document.querySelector(".right-cont");
 const gen = document.querySelector('#generate');
 const sch = document.querySelector('#search');
 const ins = document.querySelector('#install'); // install pwa
@@ -227,10 +228,23 @@ ins.addEventListener('click', () => {
 
 
 // more options
+let open = false;
 mop.addEventListener("click", (e) => {
-	let display = leftCont.style.display;
-	(display == "" || display == "none") ? display = "grid" : display = "none";
+	let display = null;
+	!open ? display = "grid" : display = "none";
 	leftCont.style.display = display;
+
+	setTimeout(()=> {
+		open = true;
+	}, 100);
+});
+rightCont.addEventListener("click", (e) => {
+	if(open) {
+		leftCont.style.display = "none";
+		setTimeout(()=> {
+			open = false;
+		}, 100);
+	}
 });
 
 // donwload maze in png format
