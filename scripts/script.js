@@ -224,7 +224,6 @@ sch.addEventListener('click', () => {
 if (deferredPrompt) {ins.style.display = "initial";}
 ins.addEventListener('click', async () => {
 	const {outcome} = await deferredPrompt.prompt();
-	console.log(outcome)
 	if (outcome != "dismissed") {
 		ins.remove();
 	}
