@@ -222,8 +222,9 @@ sch.addEventListener('click', () => {
 
 // if not installed, show install button
 if (deferredPrompt) {ins.style.display = "initial";}
-ins.addEventListener('click', () => {
-	console.log(deferredPrompt.prompt());
+ins.addEventListener('click', async () => {
+	const {outcome} = await deferredPrompt.prompt();
+	console.log(outcome)
 });
 
 
