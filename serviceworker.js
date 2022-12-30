@@ -48,7 +48,7 @@ self.addEventListener('fetch', function(event) {
 const urlsToCache = ["/", "/styles/mstyle.css", "/styles/mg.css", "/scripts/script.js", "/packages/index.js",
     "https://cdn.jsdelivr.net/gh/0-harshit-0/Utility-HTML5Canvas@master/src/shapes.min.js",
     "https://cdn.jsdelivr.net/gh/0-harshit-0/Utility-HTML5Canvas@master/src/vector.min.js",
-    "/assets/SometypeMono-Regular.woff2", "/assets/maze-16.png", "/assets/maze-512.png", "/app.webmanifest"];
+    "/assets/SometypeMono-Regular.woff2", "/assets/maze-16.png", "/assets/maze-512.png", "/manifest.json"];
 self.addEventListener("install", (event) => {
     console.log("caching");
     event.waitUntil(
