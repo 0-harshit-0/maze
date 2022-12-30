@@ -2,9 +2,9 @@ console.log("registered")
 
 self.addEventListener('fetch', function(event) {
 	const url = new URL(event.request.url);
-	if (event.request.method === 'POST' && url.pathname === '/maze/receive-share') {
+	if (event.request.method === 'POST' && url.pathname === '/receive-share') {
         // redirect the user to main page and process the recieved files
-		event.respondWith(Response.redirect('/maze/index.html'));
+		event.respondWith(Response.redirect('/index.html'));
 
         event.waitUntil(async function () {
             // get the client obj to post message later
@@ -45,10 +45,10 @@ self.addEventListener('fetch', function(event) {
 });
 
 // caching all the resources on install
-const urlsToCache = ["/maze/", "/maze/styles/mstyle.css", "/maze/styles/mg.css", "/maze/scripts/script.js", "/maze/packages/index.js",
+const urlsToCache = ["/", "/styles/mstyle.css", "/styles/mg.css", "/scripts/script.js", "/packages/index.js",
     "https://cdn.jsdelivr.net/gh/0-harshit-0/Utility-HTML5Canvas@master/src/shapes.min.js",
     "https://cdn.jsdelivr.net/gh/0-harshit-0/Utility-HTML5Canvas@master/src/vector.min.js",
-    "/maze/assets/SometypeMono-Regular.woff2", "/maze/assets/maze-16.png", "/maze/assets/maze-512.png", "/maze/app.webmanifest"];
+    "/assets/SometypeMono-Regular.woff2", "/assets/maze-16.png", "/assets/maze-512.png", "/app.webmanifest"];
 self.addEventListener("install", (event) => {
     console.log("caching");
     event.waitUntil(
