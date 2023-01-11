@@ -35,7 +35,7 @@ const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
 let timeout = false;
 
-const shp = new Shapes(ctx);
+const shape = new Shapes({canvas, context: ctx});
 let animateStore = [], store = [];
 let asIndex = 0, inter, mazeGraph, creatingMaze = false, scale = 100/100;
 
@@ -54,32 +54,32 @@ class Cells{
 		this.walls = [1,1,1,1];
 	}
 	draw() {
-		shp.rect("", this.pos.x, this.pos.y, this.l);
-		shp.fill("", this.fclr);
+		shape.rect({x: this.pos.x, y: this.pos.y, size: this.l});
+		shape.fill({color: this.fclr});
 	}
 	drawSearch() {
-		shp.rect("", this.pos.x, this.pos.y, this.l);
-		shp.fill("", this.searchclr);
+		shape.rect({x: this.pos.x, y: this.pos.y, size: this.l});
+		shape.fill({color: this.searchclr});
 	}
 	drawWalls() {
 		let lineCap = 'square';
 		let wallWidth = Math.floor(cs/4);
+		let paths = [];
 		if(this.walls[0]) {
-			shp.line("", this.pos.x, this.pos.y, this.pos.x+this.l, this.pos.y, lineCap); //top
-			shp.stroke("", this.sclr, wallWidth);
+			paths.push(shape.line({x: this.pos.x, y: this.pos.y, x1: this.pos.x+this.l, y1: this.pos.y, cap: lineCap})); //top
 		}
 		if(this.walls[1]) {
-			shp.line("", this.pos.x+this.l, this.pos.y, this.pos.x+this.l, this.pos.y+this.l, lineCap); //right
-			shp.stroke("", this.sclr, wallWidth);
+			paths.push(shape.line({x: this.pos.x+this.l, y: this.pos.y, x1: this.pos.x+this.l, y1: this.pos.y+this.l, cap: lineCap})); //right
 		}
 		if(this.walls[2]) {
-			shp.line("", this.pos.x+this.l, this.pos.y+this.l, this.pos.x, this.pos.y+this.l, lineCap);  //bottom
-			shp.stroke("", this.sclr, wallWidth);
+			paths.push(shape.line({x: this.pos.x+this.l, y: this.pos.y+this.l, x1: this.pos.x, y1: this.pos.y+this.l, cap: lineCap}));  //bottom
 		}
 		if(this.walls[3]) {
-			shp.line("", this.pos.x, this.pos.y+this.l, this.pos.x, this.pos.y, lineCap);  //left
-			shp.stroke("", this.sclr, wallWidth);
-		}		
+			paths.push(shape.line({x: this.pos.x, y: this.pos.y+this.l, x1: this.pos.x, y1: this.pos.y, cap: lineCap}));  //left
+		}
+		paths.forEach(z => {
+			shape.stroke({path: z.path, color: this.sclr, width: wallWidth});
+		});
 	}
 	removeWalls(chose) {
 		if(this.id-chose == 1) {
@@ -182,7 +182,7 @@ function searchMaze() {
 
 // start generation or search animation
 function animate(search) {
-	//shp.clear(0,0,canvas.width,canvas.height);
+	//shape.clear(0,0,canvas.width,canvas.height);
 	if(animateStore[asIndex] != undefined && !search) {// make the maze (generate maze)
 		store[animateStore[asIndex]].removeWalls(animateStore[asIndex+1]);
 		store[animateStore[asIndex]].draw();
