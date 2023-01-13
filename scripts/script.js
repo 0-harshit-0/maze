@@ -1,3 +1,22 @@
+import {create, search} from "../packages/index.js";
+
+
+const leftCont = document.querySelector(".left-cont");
+const rightCont = document.querySelector(".right-cont");
+const gen = document.querySelector('#generate');
+const sch = document.querySelector('#search');
+const ins = document.querySelector('#install'); // install pwa
+const mop = document.querySelector('#more-options'); // download canvas
+const dwn = document.querySelector('#download'); // download canvas
+const shr = document.querySelector('#share'); // share canvas
+
+// get all the input fields from html
+const fr = document.querySelector('#fr');  //frame rate
+const r = document.querySelector('#r');  //ratio
+const lc = document.querySelector('#lc');  //line clr
+const c = document.querySelector('#c');  //search clr
+const cs = document.querySelector('#s');  //cell
+
 // pwa things
 if ('serviceWorker' in navigator) {
    navigator.serviceWorker.register("serviceworker.js");
@@ -19,43 +38,35 @@ const relatedApps = await navigator.getInstalledRelatedApps();
 const PWAisInstalled = relatedApps.length > 0;
 // pwa over
 
-import {create, search} from "../packages/index.js";
 
-
-// get all the input fields from html
-const fr = document.querySelector('#fr');  //frame rate
-const r = document.querySelector('#r');  //ratio
-const lc = document.querySelector('#lc');  //line clr
-const c = document.querySelector('#c');  //search clr
-let cs = parseInt(document.querySelector('#s').value);  //cell
-
-
-
+// canvas stuff starts here
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
 let timeout = false;
 
 const shape = new Shapes({canvas, context: ctx});
-let animateStore = [], store = [];
 let asIndex = 0, inter, mazeGraph, creatingMaze = false, scale = 100/100;
-
-
-
+let animateStore = [], store = [];
 
 // A Cell in a maze
-class Cells{
+class Cells {
 	constructor(id, x, y, length) {
 		this.id = id;
 		this.pos = new Vector2D(x, y);
 		this.l = length;
-		this.sclr = '#302929';
-		this.fclr = lc.value;
+
+		this.wallClr = '#302929';
+		this.cellClr = lc.value;
 		this.searchclr = c.value;
+
 		this.walls = [1,1,1,1];
+		this.path = null;
 	}
 	draw() {
-		shape.rect({x: this.pos.x, y: this.pos.y, size: this.l});
-		shape.fill({color: this.fclr});
+		if (!this.path) {
+			this.path = shape.rect({x: this.pos.x, y: this.pos.y, size: this.l}).path;
+		}
+		shape.fill({path: this.path, color: this.cellClr});
 	}
 	drawSearch() {
 		shape.rect({x: this.pos.x, y: this.pos.y, size: this.l});
@@ -63,7 +74,7 @@ class Cells{
 	}
 	drawWalls() {
 		let lineCap = 'square';
-		let wallWidth = Math.floor(cs/4);
+		let wallWidth = Math.floor(this.l/4);
 		let paths = [];
 		if(this.walls[0]) {
 			paths.push(shape.line({x: this.pos.x, y: this.pos.y, x1: this.pos.x+this.l, y1: this.pos.y, cap: lineCap})); //top
@@ -78,7 +89,7 @@ class Cells{
 			paths.push(shape.line({x: this.pos.x, y: this.pos.y+this.l, x1: this.pos.x, y1: this.pos.y, cap: lineCap}));  //left
 		}
 		paths.forEach(z => {
-			shape.stroke({path: z.path, color: this.sclr, width: wallWidth});
+			shape.stroke({path: z.path, color: this.wallClr, width: wallWidth});
 		});
 	}
 	removeWalls(chose) {
@@ -96,17 +107,22 @@ class Cells{
 			store[chose].walls[0] = 0;
 		}
 	}
+	interactive(path, x, y) {
+		if(ctx.isPointInPath(path, x, y, "evenodd")) {
+			this.cellClr = "red";
+			this.draw();
+			this.drawWalls();
+		}
+	}
 }
-
-
 
 // store all the cells in a graph
 function make() {
 	creatingMaze = true;
 	let count = 0;
-	for(let i = 0; i < canvas.height; i+= cs) {
-		for(let j = 0; j < canvas.width; j+= cs) {
-			store.push(new Cells(count, j, i, cs, 'black', 'white'));
+	for(let i = 0; i < canvas.height; i += parseInt(cs.value)) {
+		for(let j = 0; j < canvas.width; j += parseInt(cs.value)) {
+			store.push(new Cells(count, j, i, parseInt(cs.value), 'black', 'white'));
 			count++;
 		}
 	}
@@ -128,8 +144,7 @@ function generateMaze() {
 	root.style.setProperty('--clr', lc.value);
 
 	// get the the cell size
-	cs = parseInt(document.querySelector('#s').value);
-	if (!cs) return 0;
+	if (!parseInt(cs.value)) return 0;
 
 	// if aspect ratio needs to be maintained then width and height are same else different
 	// scaling it to 90% of the container's dimension
@@ -137,26 +152,26 @@ function generateMaze() {
 	let contComputedStyle = getComputedStyle(document.querySelector('.canvas-cont'));
 	if(r.checked) {
 		let wh = Math.min(parseInt(contComputedStyle.width)*scale, parseInt(contComputedStyle.height)*scale);
-		if(wh%cs) {
-			wh -= wh%cs;
+		if(wh % parseInt(cs.value)) {
+			wh -= wh % parseInt(cs.value);
 		}
 		canvas.width = wh;
 		canvas.height = wh;
 	}else{
 		let w = parseInt(contComputedStyle.width)*scale;
 		let h = parseInt(contComputedStyle.height)*scale;
-		if(w%cs) {
-			w -= w%cs;
+		if(w % parseInt(cs.value)) {
+			w -= w % parseInt(cs.value);
 		}
-		if(h%cs) {
-			h -= h%cs;
+		if(h % parseInt(cs.value)) {
+			h -= h % parseInt(cs.value);
 		}
 		canvas.width = w;
 		canvas.height = h;
 	}
 
 	make();
-	const mazeDS = create(canvas.width, canvas.height, cs);
+	const mazeDS = create(canvas.width, canvas.height, parseInt(cs.value));
 	animateStore = [...mazeDS.mazeArr];
 	mazeGraph = mazeDS.mazeGraph;
 
@@ -165,8 +180,6 @@ function generateMaze() {
 		animate(false)
 	}, parseInt(fr.value));
 }
-
-
 
 function searchMaze() {
 	if(creatingMaze || !mazeGraph) return 0;
@@ -177,8 +190,6 @@ function searchMaze() {
 		animate(true)
 	}, parseInt(fr.value));
 }
-
-
 
 // start generation or search animation
 function animate(search) {
@@ -202,17 +213,17 @@ function animate(search) {
 	});
 }
 
+canvas.addEventListener('mousemove', e => {
+	for(let i = 0; i < store.length; i++) {
+		console.log(1)
+		let z = store[i];
+		z.interactive(z.path, e.x, e.y);
+	}
+});
 
 
-const leftCont = document.querySelector(".left-cont");
-const rightCont = document.querySelector(".right-cont");
-const gen = document.querySelector('#generate');
-const sch = document.querySelector('#search');
-const ins = document.querySelector('#install'); // install pwa
-const mop = document.querySelector('#more-options'); // download canvas
-const dwn = document.querySelector('#download'); // download canvas
-const shr = document.querySelector('#share'); // share canvas
 
+// dom related stuff.. button listeners, functions calls, etc.
 gen.addEventListener('click', () => {
 	generateMaze();
 });
@@ -228,7 +239,6 @@ ins.addEventListener('click', async () => {
 		ins.remove();
 	}
 });
-
 
 // more options
 let open = false;
