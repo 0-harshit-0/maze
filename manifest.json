@@ -6,34 +6,15 @@
   "start_url": "/",
   "scope": "/",
   "lang": "en",
-  "display": "standalone",
-  "theme_color": "black",
-  "background_color": "black",
-  "share_target": {
-     "action": "/receive-share",
-     "method": "POST",
-     "enctype": "multipart/form-data",
-     "params": {
-        "title": "title",
-        "text": "text",
-        "url": "url",
-        "files": [
-          {
-            "name": "maze",
-            "accept": "image/png"
-          },
-          {
-            "name": "maze",
-            "accept": "image/jpg"
-          }
-        ]
-     }
-  },
+  "display": "fullscreen",
+  "theme_color": "#000000",
+  "background_color": "#000000",
   "icons": [
     {
       "src": "assets/maze-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "assets/maze-512.png",

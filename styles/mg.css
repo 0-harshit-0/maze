@@ -246,7 +246,6 @@ body {
 .canvas-cont #canvas{
 	display: block;
 	background: transparent;
-	border: solid 1px var(--clr);
 
 	-webkit-transform3d: translate(0,0,0);
   -moz-transform3d: translate(0,0,0);

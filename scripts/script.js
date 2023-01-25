@@ -57,20 +57,20 @@ class Cells {
 
 		this.wallClr = '#302929';
 		this.cellClr = lc.value;
-		this.searchclr = c.value;
-
+		
 		this.walls = [1,1,1,1];
 		this.path = null;
+		this.interacted = false;
 	}
-	draw() {
+	draw(clr) {
 		if (!this.path) {
 			this.path = shape.rect({x: this.pos.x, y: this.pos.y, size: this.l}).path;
 		}
-		shape.fill({path: this.path, color: this.cellClr});
+		shape.fill({path: this.path, color: clr ?? this.cellClr});
 	}
-	drawSearch() {
+	drawSearch(clr) {
 		shape.rect({x: this.pos.x, y: this.pos.y, size: this.l});
-		shape.fill({color: this.searchclr});
+		shape.fill({color: clr});
 	}
 	drawWalls() {
 		let lineCap = 'square';
@@ -107,11 +107,17 @@ class Cells {
 			store[chose].walls[0] = 0;
 		}
 	}
-	interactive(path, x, y) {
-		if(ctx.isPointInPath(path, x, y, "evenodd")) {
-			this.cellClr = "red";
-			this.draw();
-			this.drawWalls();
+	interactive(x, y) {
+		if (shape.inPath({path: this.path, x, y})) {
+			if (!this.interacted) {
+				this.interacted = true;
+				this.drawSearch(c.value);
+			}else {
+				this.interacted = false;
+				this.draw();
+			}
+
+			shape
 		}
 	}
 }
@@ -122,7 +128,7 @@ function make() {
 	let count = 0;
 	for(let i = 0; i < canvas.height; i += parseInt(cs.value)) {
 		for(let j = 0; j < canvas.width; j += parseInt(cs.value)) {
-			store.push(new Cells(count, j, i, parseInt(cs.value), 'black', 'white'));
+			store.push(new Cells(count, j, i, parseInt(cs.value)));
 			count++;
 		}
 	}
@@ -191,6 +197,11 @@ function searchMaze() {
 	}, parseInt(fr.value));
 }
 
+function drawAllWalls() {
+	store.forEach(z=>{
+		z.drawWalls();
+	});
+}
 // start generation or search animation
 function animate(search) {
 	//shape.clear(0,0,canvas.width,canvas.height);
@@ -198,7 +209,8 @@ function animate(search) {
 		store[animateStore[asIndex]].removeWalls(animateStore[asIndex+1]);
 		store[animateStore[asIndex]].draw();
 	}else if(animateStore[asIndex] != undefined && search) { // search the maze
-		store[animateStore[asIndex]].drawSearch();
+		store[animateStore[asIndex]].drawSearch("#0f0");
+		store[animateStore[asIndex]].interacted = true;
 	}else{ // when any of the above process is finished
 		if(creatingMaze) {creatingMaze = false;}
 		console.log('stop');
@@ -208,23 +220,23 @@ function animate(search) {
 	asIndex++;
 
 	// draw the updated maze wall (some walls removed/added);
-	store.forEach(z=>{
-		z.drawWalls();
-	});
+	drawAllWalls();
 }
 
-canvas.addEventListener('mousemove', e => {
-	for(let i = 0; i < store.length; i++) {
-		console.log(1)
-		let z = store[i];
-		z.interactive(z.path, e.x, e.y);
-	}
-});
+canvas.addEventListener('mousedown', e => {
+	if (!store.length) return 1;
 
+	for(let i = 0; i < store.length; i++) {
+		let z = store[i];
+		z.interactive(e.offsetX, e.offsetY);
+	}
+	drawAllWalls();
+});
 
 
 // dom related stuff.. button listeners, functions calls, etc.
 gen.addEventListener('click', () => {
+	canvas.style.border = "solid " + (parseInt(cs.value)/10)+"px " + "#302929";
 	generateMaze();
 });
 sch.addEventListener('click', () => {

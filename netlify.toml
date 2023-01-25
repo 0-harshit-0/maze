@@ -1,0 +1,5 @@
+[[headers]]
+  for = "/.well-known/assetlinks.json"
+  [headers.values]
+    dotfiles = "allow"
+

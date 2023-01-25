@@ -133,5 +133,3 @@ dist
 .yarn/install-state.gz
 .pnp.*
 .well-known/assetlinks.json
-well-known/assetlinks.json
-netlify.toml
