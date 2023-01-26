@@ -1,6 +1,4 @@
 app
-.well-known
-netlify.toml
 
 # misc
 package-lock.json

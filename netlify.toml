@@ -1,5 +1,4 @@
-# [[headers]]
-#   for = "/.well-known/assetlinks.json"
-#   [headers.values]
-#     dotfiles = "allow"
-
+[[headers]]
+  for = ".well-known/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
