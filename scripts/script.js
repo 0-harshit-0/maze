@@ -293,7 +293,7 @@ const cs = document.querySelector('#s');  //cell
 
 // pwa things
 if ('serviceWorker' in navigator) {
-   navigator.serviceWorker.register("serviceworker.js", {scope: "/maze"});
+   navigator.serviceWorker.register("serviceworker.js", {scope: "/maze/"});
 }
 
 let deferredPrompt;
