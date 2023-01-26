@@ -3,9 +3,9 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "app.netlify.mazzzz",
+      "package_name": "io.github.app_0_harshit_0.twa",
       "sha256_cert_fingerprints":
-        ["92:B5:32:AB:34:83:34:AB:48:1A:77:D7:32:AA:BD:AF:66:EE:9E:B4:86:48:72:6F:ED:66:97:11:1A:D4:CF:A9"]
+        ["9B:7F:E2:3B:9E:9D:54:32:2E:3C:10:1B:BB:3E:57:2D:17:15:A4:D3:5E:23:63:9A:6A:8F:43:77:99:11:26:C7"]
     }
   }
 ]
