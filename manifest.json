@@ -2,7 +2,7 @@
   "id": "/",
   "name": "Mazzzz",
   "short_name": "Maze",
-  "description": "Generate maze using randomized DFS and Solve it using Path Finding algorithms.",
+  "description": "Welcome to Maze Challenge! Navigate through intricate paths, avoid dead ends, and find the exit in this thrilling online maze game. Test your skills and enjoy a fun, engaging experience. Can you conquer the maze? Try now and find out!",
   "start_url": "/maze/",
   "scope": "/maze/",
   "lang": "en",
