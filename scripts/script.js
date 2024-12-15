@@ -537,6 +537,15 @@ mop.addEventListener("click", (e) => {
 		open = true;
 	}, 100);
 });
+mop.addEventListener("touchstart", (e) => {
+	let display = null;
+	!open ? display = "grid" : display = "none";
+	leftCont.style.display = display;
+
+	setTimeout(()=> {
+		open = true;
+	}, 100);
+});
 rightCont.addEventListener("click", (e) => {
 	if(open) {
 		leftCont.style.display = "none";
