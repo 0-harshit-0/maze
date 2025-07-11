@@ -195,7 +195,7 @@ function DFS(graph, root) {
 	graph.AdjList.get(root).visited = true;
 	stk.push(root);
 	while(stk.length) {
-		let curr = stk.pop();
+		let curr = stk.pop();​
 		mazeArr.push(curr); // stores backtracked node/number/cells as well
 
 		let available = visitedNeighbours(graph, curr);
