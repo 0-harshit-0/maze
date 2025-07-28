@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Indie Playhouse</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            background-color: #ffffff; /* Clean white background */
+            color: #000000; /* Simple black text */
+            margin: 0;
+            padding: 30px; /* Increased for more space */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            text-align: center;
+            padding: 20px; /* Increased for breathing room */
+            width: 100%;
+        }
+        h1 {
+            margin: 0 0 10px; /* Added bottom margin */
+            font-size: 2em;
+            color: #000000;
+        }
+        .game-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Slightly wider min for spacing */
+            gap: 30px; /* Increased gap between cards */
+            max-width: 1200px;
+            margin: 20px auto; /* More top/bottom margin */
+        }
+        .game-card {
+            background-color: #f9f9f9; /* Very light gray for subtle separation */
+            border: 1px solid #dddddd;
+            border-radius: 4px;
+            padding: 20px; /* Increased internal padding */
+        }
+        .game-card h2 {
+            margin: 0 0 10px; /* More space below header */
+            font-size: 1.2em;
+            color: #000000;
+        }
+        .game-card p {
+            margin: 0 0 10px; /* More space below description */
+            font-size: 0.9em;
+        }
+        .game-card a {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #eeeeee;
+            color: #000000;
+            text-decoration: none;
+            border-radius: 2px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px; /* Increased for footer space */
+            font-size: 0.8em;
+            color: #666666;
+            width: 100%;
+            margin-top: 20px; /* Added top margin for separation */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Fun Indie Playhouse</h1>
+        <p>Discover and play casual indie games like Tambola, Maze, and more!</p>
+    </header>
+
+    <div class="game-list">
+        <div class="game-card">
+            <h2>Tambola</h2>
+            <p>A fun, bingo-style game where players mark numbers on tickets as they're called out. Perfect for parties!</p>
+            <a href="/tambola" target="_blank">Play Now</a> <!-- Replace with real link -->
+        </div>
+        <div class="game-card">
+            <h2>Maze Adventure</h2>
+            <p>Navigate through twisting paths to find the exit. Test your problem-solving skills in this classic puzzle.</p>
+            <a href="/maze" target="_blank">Play Now</a>
+        </div>
+        <!-- <div class="game-card">
+            <h2>Tic-Tac-Toe</h2>
+            <p>The timeless game of X's and O's. Challenge a friend or AI to a quick match.</p>
+            <a href="https://example.com/play-tictactoe" target="_blank">Play Now</a>
+        </div>
+        <div class="game-card">
+            <h2>Sudoku</h2>
+            <p>Fill the grid with numbers 1-9 without repeats. A brain-teasing logic puzzle for all ages.</p>
+            <a href="https://example.com/play-sudoku" target="_blank">Play Now</a>
+        </div>
+        <div class="game-card">
+            <h2>Simple Puzzle</h2>
+            <p>Slide tiles to form a complete picture. Easy to learn, hard to master!</p>
+            <a href="https://example.com/play-puzzle" target="_blank">Play Now</a>
+        </div> -->
+    </div>
+
+    <footer>
+        &copy; 2025 Fun Indie Playhouse.
+    </footer>
+</body>
+</html>
