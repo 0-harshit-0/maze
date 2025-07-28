@@ -14,26 +14,26 @@ const lc = document.querySelector('#lc');  //line clr
 const c = document.querySelector('#c');  //search clr
 const cs = document.querySelector('#s');  //cell
 
-// pwa things
-if ('serviceWorker' in navigator) {
-   navigator.serviceWorker.register("serviceworker.js", {scope: "/maze/"});
-}
+// // pwa things
+// if ('serviceWorker' in navigator) {
+//    navigator.serviceWorker.register("serviceworker.js", {scope: "/maze/"});
+// }
 
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e) => {
-   deferredPrompt = e;
+// let deferredPrompt;
+// window.addEventListener('beforeinstallprompt', (e) => {
+//    deferredPrompt = e;
 
-   // show install button if install prompt is present
-   if (ins) {ins.style.display = "initial";}
-});
+//    // show install button if install prompt is present
+//    if (ins) {ins.style.display = "initial";}
+// });
 
-navigator.serviceWorker.addEventListener('message', function (e) {
-   console.log(e.data.files[0]); //contains the file(s)
-});
+// navigator.serviceWorker.addEventListener('message', function (e) {
+//    console.log(e.data.files[0]); //contains the file(s)
+// });
 
-const relatedApps = await navigator.getInstalledRelatedApps();
-const PWAisInstalled = relatedApps.length > 0;
-// pwa over
+// const relatedApps = await navigator.getInstalledRelatedApps();
+// const PWAisInstalled = relatedApps.length > 0;
+// // pwa over
 
 
 // canvas stuff starts here
@@ -240,14 +240,14 @@ sch.addEventListener('click', () => {
 	searchMaze();
 });
 
-// if not installed, show install button
-if (deferredPrompt) {ins.style.display = "initial";}
-ins.addEventListener('click', async () => {
-	const {outcome} = await deferredPrompt.prompt();
-	if (outcome != "dismissed") {
-		ins.remove();
-	}
-});
+// // if not installed, show install button
+// if (deferredPrompt) {ins.style.display = "initial";}
+// ins.addEventListener('click', async () => {
+// 	const {outcome} = await deferredPrompt.prompt();
+// 	if (outcome != "dismissed") {
+// 		ins.remove();
+// 	}
+// });
 
 // more options
 let open = false;
