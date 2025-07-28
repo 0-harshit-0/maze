@@ -140,7 +140,7 @@ class UGraph {
 
 
 // maze create start
-export function create(width=3, height=3, cellSize=1) {
+function create(width=3, height=3, cellSize=1) {
 	if (!width || !height || !cellSize) throw new Error("please make sure that (width || height || cellSize) is not (null || undefined || 0)");
 	let w = width, h = height, cs = cellSize;
 
@@ -213,7 +213,7 @@ function DFS(graph, root) {
 
 // search algorithm: dijkstra
 // target is always the last cell/node in the graph
-export function search(graph, root, target, searchAlgoId=1) {
+function search(graph, root, target, searchAlgoId=1) {
 	if(!graph) throw new Error("graph is undefined");
 	if ([undefined, null].includes(root), [undefined, null].includes(target)) {
 		throw new Error("(root || target) is (null || undefined)")

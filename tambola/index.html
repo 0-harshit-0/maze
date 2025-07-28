@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Tambola A4 Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f0f0f0; }
+        .container { text-align: center; }
+        canvas { border: 2px solid #333; margin: 10px; background-color: white; box-shadow: 0 4px 20px rgba(0,0,0,0.1); max-width: 100%; height: auto; }
+        
+        .controls { background: white; padding: 20px; margin: 20px 0; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: left; }
+        .controls h3 { color: #333; margin-bottom: 15px; text-align: center; }
+        
+        .control-group { display: inline-block; margin: 10px 15px; vertical-align: top; }
+        .control-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #555; }
+        .control-group input { padding: 8px; border: 1px solid #ddd; border-radius: 4px; width: 60px; text-align: center; font-size: 14px; }
+        
+        .preset-buttons { text-align: center; margin: 20px 0; }
+        .preset-btn { background: #9C27B0; color: white; border: none; padding: 10px 20px; margin: 5px; border-radius: 5px; cursor: pointer; font-size: 14px; }
+        .preset-btn:hover { background: #7B1FA2; }
+        
+        button { padding: 12px 24px; font-size: 16px; margin: 10px; cursor: pointer; color: white; border: none; border-radius: 5px; font-weight: bold; }
+        .generate-btn { background-color: #4CAF50; }
+        .download-btn { background-color: #2196F3; }
+        .batch-btn { background-color: #FF9800; }
+        button:hover { opacity: 0.9; transform: translateY(-1px); }
+        
+        .info-display { background: #e8f5e8; padding: 15px; border-radius: 5px; margin: 20px 0; text-align: center; font-size: 14px; }
+        .section { margin: 30px 0; padding: 20px; background-color: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        #progress { display: none; margin: 20px 0; padding: 15px; background-color: #e7f3ff; border: 1px solid #b3d9ff; border-radius: 5px; color: #0066cc; font-weight: bold; }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Dynamic Tambola A4 Generator</h1>
+        <p><strong>Fully customizable grid layouts - Change any setting and everything adjusts automatically!</strong></p>
+        
+        <!-- Configuration Controls -->
+        <div class="controls">
+            <h3>⚙️ Layout Configuration</h3>
+            
+            <div class="preset-buttons">
+                <button class="preset-btn" onclick="applyPreset('large')">1×1 Large</button>
+                <button class="preset-btn" onclick="applyPreset('standard')">2×2 Standard</button>
+                <button class="preset-btn" onclick="applyPreset('compact')">3×4 Compact</button>
+                <button class="preset-btn" onclick="apply6x2Layout()">6x2 Mini</button>
+            </div>
+            
+            <div style="text-align: center;">
+                <div class="control-group">
+                    <label>Grid Rows:</label>
+                    <input type="number" id="gridRows" value="2" min="1" max="6" onchange="updateGridLayout()">
+                </div>
+                <div class="control-group">
+                    <label>Grid Columns:</label>
+                    <input type="number" id="gridCols" value="2" min="1" max="6" onchange="updateGridLayout()">
+                </div>
+                <div class="control-group">
+                    <label>Tambola Rows:</label>
+                    <input type="number" id="tambolaRows" value="3" min="1" max="5" onchange="updateTambolaLayout()">
+                </div>
+                <div class="control-group">
+                    <label>Tambola Columns:</label>
+                    <input type="number" id="tambolaCols" value="9" min="3" max="15" onchange="updateTambolaLayout()">
+                </div>
+                <div class="control-group">
+                    <label>Numbers/Row:</label>
+                    <input type="number" id="numbersPerRow" value="5" min="1" max="9" onchange="updateTambolaLayout()">
+                </div>
+            </div>
+            
+            <div id="configInfo" class="info-display"></div>
+        </div>
+        
+        <!-- Preview -->
+        <div class="section">
+            <h3>📄 Live Preview</h3>
+            <canvas id="tambolaCanvas"></canvas>
+        </div>
+        
+        <!-- Generation Controls -->
+        <div class="section">
+            <h3>🎮 Generate Tickets</h3>
+            <button class="generate-btn" onclick="generateSinglePage()">Generate New Page</button>
+            <button class="download-btn" onclick="downloadCurrentPage()">Download Current Page</button>
+            <button class="batch-btn" onclick="generateBatch()">Generate Batch</button>
+            
+            <div id="progress"></div>
+            <button id="downloadZipBtn" class="download-btn hidden" onclick="downloadBatchAsZip()">Download Batch as ZIP</button>
+        </div>
+        
+        <!-- Usage Examples -->
+        <div class="section">
+            <h3>💡 Layout Examples</h3>
+            <div style="text-align: left; max-width: 600px; margin: 0 auto;">
+                <p><strong>🔥 1×1 Layout:</strong> Maximum size single ticket per page - Perfect for display or special events</p>
+                <p><strong>⭐ 2×2 Layout:</strong> 4 large tickets per page - Best balance of size and quantity</p>
+                <p><strong>📄 3×4 Layout:</strong> 12 tickets per page - Traditional tambola book style</p>
+                <p><strong>💾 4×4 Layout:</strong> 16 mini tickets per page - Maximum tickets for bulk events</p>
+                <p><strong>🎯 Custom:</strong> Any combination from 1×1 to 6×6 - Your creativity is the limit!</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

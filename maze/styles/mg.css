@@ -43,7 +43,7 @@ input[type=number] {
 /* css reset start */
 @font-face {
   font-family: sometype;
-  src: url('../assets/SometypeMono-Regular.woff2') format('woff2');
+  src: url('../../assets/SometypeMono-Regular.woff2') format('woff2');
   font-display: swap;
 }
 *, *::before, *::after {
