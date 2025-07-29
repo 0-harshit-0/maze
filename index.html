@@ -1,54 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-34G0E2B2WD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-34G0E2B2WD');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fun Indie Playhouse</title>
     <style>
         body {
             font-family: system-ui, sans-serif;
-            background-color: #ffffff; /* Clean white background */
-            color: #000000; /* Simple black text */
+            background-color: #ffffff;
+            /* Clean white background */
+            color: #000000;
+            /* Simple black text */
             margin: 0;
-            padding: 30px; /* Increased for more space */
+            padding: 30px;
+            /* Increased for more space */
             display: flex;
             flex-direction: column;
             align-items: center;
         }
+
         header {
             text-align: center;
-            padding: 20px; /* Increased for breathing room */
+            padding: 20px;
+            /* Increased for breathing room */
             width: 100%;
         }
+
         h1 {
-            margin: 0 0 10px; /* Added bottom margin */
+            margin: 0 0 10px;
+            /* Added bottom margin */
             font-size: 2em;
             color: #000000;
         }
+
         .game-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Slightly wider min for spacing */
-            gap: 30px; /* Increased gap between cards */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            /* Slightly wider min for spacing */
+            gap: 30px;
+            /* Increased gap between cards */
             max-width: 1200px;
-            margin: 20px auto; /* More top/bottom margin */
-            width: 100%; /* Ensure full width for responsiveness */
+            margin: 20px auto;
+            /* More top/bottom margin */
+            width: 100%;
+            /* Ensure full width for responsiveness */
         }
+
         .game-card {
-            background-color: #f9f9f9; /* Very light gray for subtle separation */
+            background-color: #f9f9f9;
+            /* Very light gray for subtle separation */
             border: 1px solid #dddddd;
             border-radius: 4px;
-            padding: 20px; /* Increased internal padding */
-            box-sizing: border-box; /* Ensure padding is included in width */
+            padding: 20px;
+            /* Increased internal padding */
+            box-sizing: border-box;
+            /* Ensure padding is included in width */
         }
+
         .game-card h2 {
-            margin: 0 0 10px; /* More space below header */
+            margin: 0 0 10px;
+            /* More space below header */
             font-size: 1.2em;
             color: #000000;
         }
+
         .game-card p {
-            margin: 0 0 10px; /* More space below description */
+            margin: 0 0 10px;
+            /* More space below description */
             font-size: 0.9em;
         }
+
         .game-card a {
             display: inline-block;
             padding: 5px 10px;
@@ -57,34 +89,47 @@
             text-decoration: none;
             border-radius: 2px;
         }
+
         footer {
             text-align: center;
-            padding: 20px; /* Increased for footer space */
+            padding: 20px;
+            /* Increased for footer space */
             font-size: 0.8em;
             color: #666666;
             width: 100%;
-            margin-top: 20px; /* Added top margin for separation */
+            margin-top: 20px;
+            /* Added top margin for separation */
         }
 
         /* Media queries for responsiveness */
         @media (max-width: 768px) {
             body {
-                padding: 15px; /* Reduce padding on tablets and smaller */
+                padding: 15px;
+                /* Reduce padding on tablets and smaller */
             }
+
             header {
                 padding: 15px;
             }
+
             h1 {
-                font-size: 1.8em; /* Slightly smaller header */
+                font-size: 1.8em;
+                /* Slightly smaller header */
             }
+
             .game-list {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust min width for better fit */
-                gap: 20px; /* Reduce gap */
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                /* Adjust min width for better fit */
+                gap: 20px;
+                /* Reduce gap */
                 margin: 15px auto;
             }
+
             .game-card {
-                padding: 15px; /* Reduce card padding */
+                padding: 15px;
+                /* Reduce card padding */
             }
+
             footer {
                 padding: 15px;
                 margin-top: 15px;
@@ -93,28 +138,40 @@
 
         @media (max-width: 480px) {
             body {
-                padding: 10px; /* Minimal padding on mobile */
+                padding: 10px;
+                /* Minimal padding on mobile */
             }
+
             header {
                 padding: 10px;
             }
+
             h1 {
-                font-size: 1.5em; /* Smaller header for mobile */
+                font-size: 1.5em;
+                /* Smaller header for mobile */
             }
+
             .game-list {
-                grid-template-columns: 1fr; /* Single column on very small screens */
-                gap: 15px; /* Smaller gap */
+                grid-template-columns: 1fr;
+                /* Single column on very small screens */
+                gap: 15px;
+                /* Smaller gap */
                 margin: 10px auto;
             }
+
             .game-card {
-                padding: 10px; /* Minimal card padding */
+                padding: 10px;
+                /* Minimal card padding */
             }
+
             .game-card h2 {
                 font-size: 1.1em;
             }
+
             .game-card p {
                 font-size: 0.85em;
             }
+
             footer {
                 padding: 10px;
                 font-size: 0.75em;
@@ -123,6 +180,7 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <h1>Fun Indie Playhouse</h1>
@@ -132,12 +190,14 @@
     <div class="game-list">
         <div class="game-card">
             <h2>Tambola</h2>
-            <p>A fun, bingo-style game where players mark numbers on tickets as they're called out. Perfect for parties!</p>
+            <p>A fun, bingo-style game where players mark numbers on tickets as they're called out. Perfect for parties!
+            </p>
             <a href="/Indie-Game-Lounge/tambola" target="_blank">Play Now</a> <!-- Replace with real link -->
         </div>
         <div class="game-card">
             <h2>Maze Adventure</h2>
-            <p>Navigate through twisting paths to find the exit. Test your problem-solving skills in this classic puzzle.</p>
+            <p>Navigate through twisting paths to find the exit. Test your problem-solving skills in this classic
+                puzzle.</p>
             <a href="/Indie-Game-Lounge/maze" target="_blank">Play Now</a>
         </div>
         <!-- <div class="game-card">
@@ -161,4 +221,5 @@
         &copy; 2025 Fun Indie Playhouse.
     </footer>
 </body>
+
 </html>
