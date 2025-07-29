@@ -1,22 +1,42 @@
 # Indie Game Lounge
 
-**Indie Game Lounge** is a static web application designed as an interactive platform for exploring graph theory, traversal algorithms, and path-finding techniques through fun, engaging indie-style games. Currently featuring a maze generator and solver, it serves as a learning tool and playground for developers and enthusiasts interested in algorithms and game development 🎯.
+Welcome to **Indie Game Lounge**, an open-source collection of interactive web-based games built to entertain, educate, and inspire. This repository hosts a variety of indie-style games, including puzzle solvers, classic party games, and more. It's perfect for casual players, developers looking to learn from code, or anyone wanting to contribute to fun projects.
 
-## Features
+Whether you're generating mazes, playing traditional number games, or exploring algorithmic challenges, Indie Game Lounge offers something for everyone. Built with simplicity and accessibility in mind, all games run directly in the browser.
 
-- **Progressive Web App (PWA) Support**: Install and play offline on any device for a seamless experience.
-- **Customizable Maze Creation**: Generate mazes of various sizes and colors to suit your preferences.
-- **Path-Finding Algorithms**: Solve mazes using Dijkstra's algorithm, with plans to add more algorithms like A* and BFS in future updates.
+## Games Included
 
-## Technologies Used
+- **Maze Generator and Solver**: Create customizable mazes and watch algorithms like Dijkstra's find the shortest path. Ideal for learning graph theory and pathfinding.
+- **Tambola (Housie/Bingo)**: A digital take on the classic number-calling game, also known as Indian Bingo. Generate tickets, call numbers, and claim prizes like Full House, Top Line, or Four Corners. Supports multiple players and variants for added fun[11][15].
+- **Future Expansions**: Plans to add more games like A* pathfinding demos, trivia challenges, and multiplayer modes. Suggestions welcome!
 
-This application is built with JavaScript (using npm for package management). If you're a Python enthusiast, a Python version is also available for experimentation—check the repository branches or related projects for details.
+## Key Features
 
-## Getting Started
+- **Browser-Based Play**: No installations needed – just open and enjoy.
+- **Customization Options**: Adjust game settings, such as maze sizes, colors, or Tambola ticket counts.
+- **Educational Value**: Dive into the code to understand algorithms, random generation, and game logic.
+- **Offline Support**: Progressive Web App (PWA) capabilities for playing without internet.
 
-1. Clone the repository: `git clone https://github.com/0-harshit-0/Indie-Game-Lounge.git`
-2. Install dependencies: `npm install`
-3. Run the app: `npm start`
-4. Open in your browser and start generating mazes!
+## Technologies
 
-Explore, learn, and contribute to expand this lounge with more indie game features and algorithms. Pull requests are welcome!
+- **Core Stack**: JavaScript for logic, HTML/CSS for interfaces, and npm for dependencies.
+- **Algorithms**: Implements Dijkstra's for mazes; random number generation for Tambola.
+- **Variants Available**: Check branches for Python implementations or experimental features.
+
+## Installation and Setup
+
+To run locally:
+
+1. Clone the repo: `git clone https://github.com/0-harshit-0/Indie-Game-Lounge.git`
+2. Navigate to the directory: `cd Indie-Game-Lounge`
+3. Install dependencies: `npm install`
+4. Start the server: `npm start`
+5. Visit `localhost:3000` in your browser to play.
+
+For Tambola-specific setup, explore the `tambola` folder for ticket generators and game runners.
+
+## Contributing
+
+We love contributions! Fork the repo, make your changes, and submit a pull request. Focus areas include adding new games, improving UI, or optimizing algorithms. Please follow the code of conduct and include tests where possible.
+
+Join the lounge – play, code, and create!
