@@ -31,12 +31,14 @@
             gap: 30px; /* Increased gap between cards */
             max-width: 1200px;
             margin: 20px auto; /* More top/bottom margin */
+            width: 100%; /* Ensure full width for responsiveness */
         }
         .game-card {
             background-color: #f9f9f9; /* Very light gray for subtle separation */
             border: 1px solid #dddddd;
             border-radius: 4px;
             padding: 20px; /* Increased internal padding */
+            box-sizing: border-box; /* Ensure padding is included in width */
         }
         .game-card h2 {
             margin: 0 0 10px; /* More space below header */
@@ -62,6 +64,62 @@
             color: #666666;
             width: 100%;
             margin-top: 20px; /* Added top margin for separation */
+        }
+
+        /* Media queries for responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px; /* Reduce padding on tablets and smaller */
+            }
+            header {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 1.8em; /* Slightly smaller header */
+            }
+            .game-list {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust min width for better fit */
+                gap: 20px; /* Reduce gap */
+                margin: 15px auto;
+            }
+            .game-card {
+                padding: 15px; /* Reduce card padding */
+            }
+            footer {
+                padding: 15px;
+                margin-top: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px; /* Minimal padding on mobile */
+            }
+            header {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 1.5em; /* Smaller header for mobile */
+            }
+            .game-list {
+                grid-template-columns: 1fr; /* Single column on very small screens */
+                gap: 15px; /* Smaller gap */
+                margin: 10px auto;
+            }
+            .game-card {
+                padding: 10px; /* Minimal card padding */
+            }
+            .game-card h2 {
+                font-size: 1.1em;
+            }
+            .game-card p {
+                font-size: 0.85em;
+            }
+            footer {
+                padding: 10px;
+                font-size: 0.75em;
+                margin-top: 10px;
+            }
         }
     </style>
 </head>
