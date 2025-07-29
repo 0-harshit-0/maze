@@ -7,7 +7,7 @@ Whether you're generating mazes, playing traditional number games, or exploring 
 ## Games Included
 
 - **Maze Generator and Solver**: Create customizable mazes and watch algorithms like Dijkstra's find the shortest path. Ideal for learning graph theory and pathfinding.
-- **Tambola (Housie/Bingo)**: A digital take on the classic number-calling game, also known as Indian Bingo. Generate tickets, call numbers, and claim prizes like Full House, Top Line, or Four Corners. Supports multiple players and variants for added fun[11][15].
+- **Tambola (Housie/Bingo)**: A digital take on the classic number-calling game, also known as Indian Bingo. Generate tickets, Save, Print and start playing!
 - **Future Expansions**: Plans to add more games like A* pathfinding demos, trivia challenges, and multiplayer modes. Suggestions welcome!
 
 ## Key Features
@@ -15,25 +15,13 @@ Whether you're generating mazes, playing traditional number games, or exploring 
 - **Browser-Based Play**: No installations needed – just open and enjoy.
 - **Customization Options**: Adjust game settings, such as maze sizes, colors, or Tambola ticket counts.
 - **Educational Value**: Dive into the code to understand algorithms, random generation, and game logic.
-- **Offline Support**: Progressive Web App (PWA) capabilities for playing without internet.
+<!-- - **Offline Support**: Progressive Web App (PWA) capabilities for playing without internet. -->
 
 ## Technologies
 
 - **Core Stack**: JavaScript for logic, HTML/CSS for interfaces, and npm for dependencies.
 - **Algorithms**: Implements Dijkstra's for mazes; random number generation for Tambola.
-- **Variants Available**: Check branches for Python implementations or experimental features.
 
-## Installation and Setup
-
-To run locally:
-
-1. Clone the repo: `git clone https://github.com/0-harshit-0/Indie-Game-Lounge.git`
-2. Navigate to the directory: `cd Indie-Game-Lounge`
-3. Install dependencies: `npm install`
-4. Start the server: `npm start`
-5. Visit `localhost:3000` in your browser to play.
-
-For Tambola-specific setup, explore the `tambola` folder for ticket generators and game runners.
 
 ## Contributing
 
